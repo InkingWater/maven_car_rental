@@ -1,11 +1,14 @@
 package xyz.light_seekers.maven_car_rental.web.controller;
 
 import io.swagger.annotations.Api;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Description:
@@ -27,5 +30,13 @@ public class ClientController {
         } finally {
             return passwordMD5;
         }
+    }
+
+    @GetMapping("/car")
+    public Map<String,String> car(){
+        Map<String,String > map = new HashMap<>();
+        map.put("brand","Benz");
+        map.put("price","1000K");
+        return map;
     }
 }
