@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.light_seekers.maven_car_rental.mapper.ActualDailyKilometersInfoMapper">
+  <resultMap id="BaseResultMap" type="xyz.light_seekers.maven_car_rental.bean.ActualDailyKilometersInfo">
+    <id column="rental_id" jdbcType="VARCHAR" property="rentalId" />
+    <result column="daily_kilometers" jdbcType="DOUBLE" property="dailyKilometers" />
+    <result column="time" jdbcType="DATE" property="time" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    rental_id, daily_kilometers, time
+  </sql>
+  <select id="selectByExample" parameterType="xyz.light_seekers.maven_car_rental.bean.ActualDailyKilometersInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from actual_daily_kilometers_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from actual_daily_kilometers_info
+    where rental_id = #{rentalId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from actual_daily_kilometers_info
+    where rental_id = #{rentalId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="xyz.light_seekers.maven_car_rental.bean.ActualDailyKilometersInfoExample">
+    delete from actual_daily_kilometers_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="xyz.light_seekers.maven_car_rental.bean.ActualDailyKilometersInfo">
+    insert into actual_daily_kilometers_info (rental_id, daily_kilometers, time
+      )
+    values (#{rentalId,jdbcType=VARCHAR}, #{dailyKilometers,jdbcType=DOUBLE}, #{time,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="xyz.light_seekers.maven_car_rental.bean.ActualDailyKilometersInfo">
+    insert into actual_daily_kilometers_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rentalId != null">
+        rental_id,
+      </if>
+      <if test="dailyKilometers != null">
+        daily_kilometers,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rentalId != null">
+        #{rentalId,jdbcType=VARCHAR},
+      </if>
+      <if test="dailyKilometers != null">
+        #{dailyKilometers,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="xyz.light_seekers.maven_car_rental.bean.ActualDailyKilometersInfoExample" resultType="java.lang.Long">
+    select count(*) from actual_daily_kilometers_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update actual_daily_kilometers_info
+    <set>
+      <if test="record.rentalId != null">
+        rental_id = #{record.rentalId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dailyKilometers != null">
+        daily_kilometers = #{record.dailyKilometers,jdbcType=DOUBLE},
+      </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update actual_daily_kilometers_info
+    set rental_id = #{record.rentalId,jdbcType=VARCHAR},
+      daily_kilometers = #{record.dailyKilometers,jdbcType=DOUBLE},
+      time = #{record.time,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="xyz.light_seekers.maven_car_rental.bean.ActualDailyKilometersInfo">
+    update actual_daily_kilometers_info
+    <set>
+      <if test="dailyKilometers != null">
+        daily_kilometers = #{dailyKilometers,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=DATE},
+      </if>
+    </set>
+    where rental_id = #{rentalId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="xyz.light_seekers.maven_car_rental.bean.ActualDailyKilometersInfo">
+    update actual_daily_kilometers_info
+    set daily_kilometers = #{dailyKilometers,jdbcType=DOUBLE},
+      time = #{time,jdbcType=DATE}
+    where rental_id = #{rentalId,jdbcType=VARCHAR}
+  </update>
+</mapper>

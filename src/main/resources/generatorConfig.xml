@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- mybatis-generator的核心配置文件 -->
+<generatorConfiguration>
+    <!--驱动jar包所在路径-->
+    <classPathEntry
+            location="F:/Repository/Maven/maven-repository-3.6.2/mysql/mysql-connector-java/5.1.24/mysql-connector-java-5.1.24.jar"/>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!--实现pojo类时自动序列化-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+        <!--实现pojo类时自动toString-->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- 注意！如果要重新生成pojo类，务必改成项目组数据库，用户名密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://47.101.199.168:3306/db_car_rental_web?useunicode=true;characterEncoding=utf8"
+                        userId="test_car"
+                        password="123456">
+        </jdbcConnection>
+
+
+        <!--指定生成的类型为java类型，避免数据库中number等类型字段 -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--自动生成的实体的存放包路径 -->
+        <javaModelGenerator targetPackage="xyz.light_seekers.maven_car_rental.bean"
+                            targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--自动生成的*Mapper.xml文件存放路径 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="./src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--自动生成的*Mapper.java存放路径 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="xyz.light_seekers.maven_car_rental.mapper" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+
+        <!-- 映射配置 -->
+        <table tableName="type_info" domainObjectName="TypeInfo"></table>
+        <table tableName="company_info" domainObjectName="CompanyInfo"></table>
+        <table tableName="car_info" domainObjectName="CarInfo"></table>
+        <table tableName="vip_type_info" domainObjectName="VipTypeInfo"></table>
+        <table tableName="client_info" domainObjectName="ClientInfo"></table>
+        <table tableName="employee_info" domainObjectName="EmployeeInfo"></table>
+        <table tableName="rental_info" domainObjectName="RentalInfo"></table>
+        <table tableName="operation_log_info" domainObjectName="OperationLogInfo"></table>
+        <table tableName="actual_daily_kilometers_info" domainObjectName="ActualDailyKilometersInfo"></table>
+
+
+    </context>
+</generatorConfiguration>

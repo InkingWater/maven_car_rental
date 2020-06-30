@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.light_seekers.maven_car_rental.mapper.CarInfoMapper">
+  <resultMap id="BaseResultMap" type="xyz.light_seekers.maven_car_rental.bean.CarInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="motor_number" jdbcType="VARCHAR" property="motorNumber" />
+    <result column="carriage_number" jdbcType="VARCHAR" property="carriageNumber" />
+    <result column="purchase_date" jdbcType="DATE" property="purchaseDate" />
+    <result column="policy_number" jdbcType="VARCHAR" property="policyNumber" />
+    <result column="insurance_companies_id" jdbcType="INTEGER" property="insuranceCompaniesId" />
+    <result column="insurance_category" jdbcType="INTEGER" property="insuranceCategory" />
+    <result column="commencement_date" jdbcType="DATE" property="commencementDate" />
+    <result column="end_date" jdbcType="DATE" property="endDate" />
+    <result column="deposit" jdbcType="DOUBLE" property="deposit" />
+    <result column="daily_rental" jdbcType="DOUBLE" property="dailyRental" />
+    <result column="weekly_rental" jdbcType="DOUBLE" property="weeklyRental" />
+    <result column="monthly_rental" jdbcType="DOUBLE" property="monthlyRental" />
+    <result column="weekend_rental" jdbcType="DOUBLE" property="weekendRental" />
+    <result column="limited_kilometers" jdbcType="DOUBLE" property="limitedKilometers" />
+    <result column="timeout_rental" jdbcType="DOUBLE" property="timeoutRental" />
+    <result column="over_km_rental" jdbcType="DOUBLE" property="overKmRental" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, type_id, name, color, motor_number, carriage_number, purchase_date, policy_number, 
+    insurance_companies_id, insurance_category, commencement_date, end_date, deposit, 
+    daily_rental, weekly_rental, monthly_rental, weekend_rental, limited_kilometers, 
+    timeout_rental, over_km_rental, state, note
+  </sql>
+  <select id="selectByExample" parameterType="xyz.light_seekers.maven_car_rental.bean.CarInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from car_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from car_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="xyz.light_seekers.maven_car_rental.bean.CarInfoExample">
+    delete from car_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="xyz.light_seekers.maven_car_rental.bean.CarInfo">
+    insert into car_info (id, type_id, name, 
+      color, motor_number, carriage_number, 
+      purchase_date, policy_number, insurance_companies_id, 
+      insurance_category, commencement_date, end_date, 
+      deposit, daily_rental, weekly_rental, 
+      monthly_rental, weekend_rental, limited_kilometers, 
+      timeout_rental, over_km_rental, state, 
+      note)
+    values (#{id,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{color,jdbcType=VARCHAR}, #{motorNumber,jdbcType=VARCHAR}, #{carriageNumber,jdbcType=VARCHAR}, 
+      #{purchaseDate,jdbcType=DATE}, #{policyNumber,jdbcType=VARCHAR}, #{insuranceCompaniesId,jdbcType=INTEGER}, 
+      #{insuranceCategory,jdbcType=INTEGER}, #{commencementDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, 
+      #{deposit,jdbcType=DOUBLE}, #{dailyRental,jdbcType=DOUBLE}, #{weeklyRental,jdbcType=DOUBLE}, 
+      #{monthlyRental,jdbcType=DOUBLE}, #{weekendRental,jdbcType=DOUBLE}, #{limitedKilometers,jdbcType=DOUBLE}, 
+      #{timeoutRental,jdbcType=DOUBLE}, #{overKmRental,jdbcType=DOUBLE}, #{state,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="xyz.light_seekers.maven_car_rental.bean.CarInfo">
+    insert into car_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="motorNumber != null">
+        motor_number,
+      </if>
+      <if test="carriageNumber != null">
+        carriage_number,
+      </if>
+      <if test="purchaseDate != null">
+        purchase_date,
+      </if>
+      <if test="policyNumber != null">
+        policy_number,
+      </if>
+      <if test="insuranceCompaniesId != null">
+        insurance_companies_id,
+      </if>
+      <if test="insuranceCategory != null">
+        insurance_category,
+      </if>
+      <if test="commencementDate != null">
+        commencement_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+      <if test="deposit != null">
+        deposit,
+      </if>
+      <if test="dailyRental != null">
+        daily_rental,
+      </if>
+      <if test="weeklyRental != null">
+        weekly_rental,
+      </if>
+      <if test="monthlyRental != null">
+        monthly_rental,
+      </if>
+      <if test="weekendRental != null">
+        weekend_rental,
+      </if>
+      <if test="limitedKilometers != null">
+        limited_kilometers,
+      </if>
+      <if test="timeoutRental != null">
+        timeout_rental,
+      </if>
+      <if test="overKmRental != null">
+        over_km_rental,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="motorNumber != null">
+        #{motorNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="carriageNumber != null">
+        #{carriageNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseDate != null">
+        #{purchaseDate,jdbcType=DATE},
+      </if>
+      <if test="policyNumber != null">
+        #{policyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceCompaniesId != null">
+        #{insuranceCompaniesId,jdbcType=INTEGER},
+      </if>
+      <if test="insuranceCategory != null">
+        #{insuranceCategory,jdbcType=INTEGER},
+      </if>
+      <if test="commencementDate != null">
+        #{commencementDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="deposit != null">
+        #{deposit,jdbcType=DOUBLE},
+      </if>
+      <if test="dailyRental != null">
+        #{dailyRental,jdbcType=DOUBLE},
+      </if>
+      <if test="weeklyRental != null">
+        #{weeklyRental,jdbcType=DOUBLE},
+      </if>
+      <if test="monthlyRental != null">
+        #{monthlyRental,jdbcType=DOUBLE},
+      </if>
+      <if test="weekendRental != null">
+        #{weekendRental,jdbcType=DOUBLE},
+      </if>
+      <if test="limitedKilometers != null">
+        #{limitedKilometers,jdbcType=DOUBLE},
+      </if>
+      <if test="timeoutRental != null">
+        #{timeoutRental,jdbcType=DOUBLE},
+      </if>
+      <if test="overKmRental != null">
+        #{overKmRental,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="xyz.light_seekers.maven_car_rental.bean.CarInfoExample" resultType="java.lang.Long">
+    select count(*) from car_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update car_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeId != null">
+        type_id = #{record.typeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.motorNumber != null">
+        motor_number = #{record.motorNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carriageNumber != null">
+        carriage_number = #{record.carriageNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchaseDate != null">
+        purchase_date = #{record.purchaseDate,jdbcType=DATE},
+      </if>
+      <if test="record.policyNumber != null">
+        policy_number = #{record.policyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insuranceCompaniesId != null">
+        insurance_companies_id = #{record.insuranceCompaniesId,jdbcType=INTEGER},
+      </if>
+      <if test="record.insuranceCategory != null">
+        insurance_category = #{record.insuranceCategory,jdbcType=INTEGER},
+      </if>
+      <if test="record.commencementDate != null">
+        commencement_date = #{record.commencementDate,jdbcType=DATE},
+      </if>
+      <if test="record.endDate != null">
+        end_date = #{record.endDate,jdbcType=DATE},
+      </if>
+      <if test="record.deposit != null">
+        deposit = #{record.deposit,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dailyRental != null">
+        daily_rental = #{record.dailyRental,jdbcType=DOUBLE},
+      </if>
+      <if test="record.weeklyRental != null">
+        weekly_rental = #{record.weeklyRental,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monthlyRental != null">
+        monthly_rental = #{record.monthlyRental,jdbcType=DOUBLE},
+      </if>
+      <if test="record.weekendRental != null">
+        weekend_rental = #{record.weekendRental,jdbcType=DOUBLE},
+      </if>
+      <if test="record.limitedKilometers != null">
+        limited_kilometers = #{record.limitedKilometers,jdbcType=DOUBLE},
+      </if>
+      <if test="record.timeoutRental != null">
+        timeout_rental = #{record.timeoutRental,jdbcType=DOUBLE},
+      </if>
+      <if test="record.overKmRental != null">
+        over_km_rental = #{record.overKmRental,jdbcType=DOUBLE},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null">
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update car_info
+    set id = #{record.id,jdbcType=VARCHAR},
+      type_id = #{record.typeId,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      motor_number = #{record.motorNumber,jdbcType=VARCHAR},
+      carriage_number = #{record.carriageNumber,jdbcType=VARCHAR},
+      purchase_date = #{record.purchaseDate,jdbcType=DATE},
+      policy_number = #{record.policyNumber,jdbcType=VARCHAR},
+      insurance_companies_id = #{record.insuranceCompaniesId,jdbcType=INTEGER},
+      insurance_category = #{record.insuranceCategory,jdbcType=INTEGER},
+      commencement_date = #{record.commencementDate,jdbcType=DATE},
+      end_date = #{record.endDate,jdbcType=DATE},
+      deposit = #{record.deposit,jdbcType=DOUBLE},
+      daily_rental = #{record.dailyRental,jdbcType=DOUBLE},
+      weekly_rental = #{record.weeklyRental,jdbcType=DOUBLE},
+      monthly_rental = #{record.monthlyRental,jdbcType=DOUBLE},
+      weekend_rental = #{record.weekendRental,jdbcType=DOUBLE},
+      limited_kilometers = #{record.limitedKilometers,jdbcType=DOUBLE},
+      timeout_rental = #{record.timeoutRental,jdbcType=DOUBLE},
+      over_km_rental = #{record.overKmRental,jdbcType=DOUBLE},
+      state = #{record.state,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="xyz.light_seekers.maven_car_rental.bean.CarInfo">
+    update car_info
+    <set>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="motorNumber != null">
+        motor_number = #{motorNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="carriageNumber != null">
+        carriage_number = #{carriageNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseDate != null">
+        purchase_date = #{purchaseDate,jdbcType=DATE},
+      </if>
+      <if test="policyNumber != null">
+        policy_number = #{policyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceCompaniesId != null">
+        insurance_companies_id = #{insuranceCompaniesId,jdbcType=INTEGER},
+      </if>
+      <if test="insuranceCategory != null">
+        insurance_category = #{insuranceCategory,jdbcType=INTEGER},
+      </if>
+      <if test="commencementDate != null">
+        commencement_date = #{commencementDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        end_date = #{endDate,jdbcType=DATE},
+      </if>
+      <if test="deposit != null">
+        deposit = #{deposit,jdbcType=DOUBLE},
+      </if>
+      <if test="dailyRental != null">
+        daily_rental = #{dailyRental,jdbcType=DOUBLE},
+      </if>
+      <if test="weeklyRental != null">
+        weekly_rental = #{weeklyRental,jdbcType=DOUBLE},
+      </if>
+      <if test="monthlyRental != null">
+        monthly_rental = #{monthlyRental,jdbcType=DOUBLE},
+      </if>
+      <if test="weekendRental != null">
+        weekend_rental = #{weekendRental,jdbcType=DOUBLE},
+      </if>
+      <if test="limitedKilometers != null">
+        limited_kilometers = #{limitedKilometers,jdbcType=DOUBLE},
+      </if>
+      <if test="timeoutRental != null">
+        timeout_rental = #{timeoutRental,jdbcType=DOUBLE},
+      </if>
+      <if test="overKmRental != null">
+        over_km_rental = #{overKmRental,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="xyz.light_seekers.maven_car_rental.bean.CarInfo">
+    update car_info
+    set type_id = #{typeId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      motor_number = #{motorNumber,jdbcType=VARCHAR},
+      carriage_number = #{carriageNumber,jdbcType=VARCHAR},
+      purchase_date = #{purchaseDate,jdbcType=DATE},
+      policy_number = #{policyNumber,jdbcType=VARCHAR},
+      insurance_companies_id = #{insuranceCompaniesId,jdbcType=INTEGER},
+      insurance_category = #{insuranceCategory,jdbcType=INTEGER},
+      commencement_date = #{commencementDate,jdbcType=DATE},
+      end_date = #{endDate,jdbcType=DATE},
+      deposit = #{deposit,jdbcType=DOUBLE},
+      daily_rental = #{dailyRental,jdbcType=DOUBLE},
+      weekly_rental = #{weeklyRental,jdbcType=DOUBLE},
+      monthly_rental = #{monthlyRental,jdbcType=DOUBLE},
+      weekend_rental = #{weekendRental,jdbcType=DOUBLE},
+      limited_kilometers = #{limitedKilometers,jdbcType=DOUBLE},
+      timeout_rental = #{timeoutRental,jdbcType=DOUBLE},
+      over_km_rental = #{overKmRental,jdbcType=DOUBLE},
+      state = #{state,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

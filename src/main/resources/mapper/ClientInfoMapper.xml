@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.light_seekers.maven_car_rental.mapper.ClientInfoMapper">
+  <resultMap id="BaseResultMap" type="xyz.light_seekers.maven_car_rental.bean.ClientInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="work_address" jdbcType="VARCHAR" property="workAddress" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="postal_card" jdbcType="VARCHAR" property="postalCard" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="pass_post_number" jdbcType="VARCHAR" property="passPostNumber" />
+    <result column="driver_license_type" jdbcType="VARCHAR" property="driverLicenseType" />
+    <result column="commencement_date" jdbcType="DATE" property="commencementDate" />
+    <result column="end_date" jdbcType="DATE" property="endDate" />
+    <result column="driver_age" jdbcType="INTEGER" property="driverAge" />
+    <result column="vip" jdbcType="INTEGER" property="vip" />
+    <result column="vip_category" jdbcType="INTEGER" property="vipCategory" />
+    <result column="mortgage_category" jdbcType="VARCHAR" property="mortgageCategory" />
+    <result column="guarantor" jdbcType="VARCHAR" property="guarantor" />
+    <result column="guarantor_id_card" jdbcType="VARCHAR" property="guarantorIdCard" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, password, sex, age, id_card, phone, work_address, address, postal_card, 
+    email, pass_post_number, driver_license_type, commencement_date, end_date, driver_age, 
+    vip, vip_category, mortgage_category, guarantor, guarantor_id_card
+  </sql>
+  <select id="selectByExample" parameterType="xyz.light_seekers.maven_car_rental.bean.ClientInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from client_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from client_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from client_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="xyz.light_seekers.maven_car_rental.bean.ClientInfoExample">
+    delete from client_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="xyz.light_seekers.maven_car_rental.bean.ClientInfo">
+    insert into client_info (id, name, password, 
+      sex, age, id_card, phone, 
+      work_address, address, postal_card, 
+      email, pass_post_number, driver_license_type, 
+      commencement_date, end_date, driver_age, 
+      vip, vip_category, mortgage_category, 
+      guarantor, guarantor_id_card)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{idCard,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{workAddress,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{postalCard,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{passPostNumber,jdbcType=VARCHAR}, #{driverLicenseType,jdbcType=VARCHAR}, 
+      #{commencementDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, #{driverAge,jdbcType=INTEGER}, 
+      #{vip,jdbcType=INTEGER}, #{vipCategory,jdbcType=INTEGER}, #{mortgageCategory,jdbcType=VARCHAR}, 
+      #{guarantor,jdbcType=VARCHAR}, #{guarantorIdCard,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="xyz.light_seekers.maven_car_rental.bean.ClientInfo">
+    insert into client_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="idCard != null">
+        id_card,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="workAddress != null">
+        work_address,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="postalCard != null">
+        postal_card,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="passPostNumber != null">
+        pass_post_number,
+      </if>
+      <if test="driverLicenseType != null">
+        driver_license_type,
+      </if>
+      <if test="commencementDate != null">
+        commencement_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+      <if test="driverAge != null">
+        driver_age,
+      </if>
+      <if test="vip != null">
+        vip,
+      </if>
+      <if test="vipCategory != null">
+        vip_category,
+      </if>
+      <if test="mortgageCategory != null">
+        mortgage_category,
+      </if>
+      <if test="guarantor != null">
+        guarantor,
+      </if>
+      <if test="guarantorIdCard != null">
+        guarantor_id_card,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="workAddress != null">
+        #{workAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postalCard != null">
+        #{postalCard,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="passPostNumber != null">
+        #{passPostNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="driverLicenseType != null">
+        #{driverLicenseType,jdbcType=VARCHAR},
+      </if>
+      <if test="commencementDate != null">
+        #{commencementDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="driverAge != null">
+        #{driverAge,jdbcType=INTEGER},
+      </if>
+      <if test="vip != null">
+        #{vip,jdbcType=INTEGER},
+      </if>
+      <if test="vipCategory != null">
+        #{vipCategory,jdbcType=INTEGER},
+      </if>
+      <if test="mortgageCategory != null">
+        #{mortgageCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantor != null">
+        #{guarantor,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantorIdCard != null">
+        #{guarantorIdCard,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="xyz.light_seekers.maven_car_rental.bean.ClientInfoExample" resultType="java.lang.Long">
+    select count(*) from client_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update client_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.idCard != null">
+        id_card = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workAddress != null">
+        work_address = #{record.workAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postalCard != null">
+        postal_card = #{record.postalCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passPostNumber != null">
+        pass_post_number = #{record.passPostNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.driverLicenseType != null">
+        driver_license_type = #{record.driverLicenseType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commencementDate != null">
+        commencement_date = #{record.commencementDate,jdbcType=DATE},
+      </if>
+      <if test="record.endDate != null">
+        end_date = #{record.endDate,jdbcType=DATE},
+      </if>
+      <if test="record.driverAge != null">
+        driver_age = #{record.driverAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.vip != null">
+        vip = #{record.vip,jdbcType=INTEGER},
+      </if>
+      <if test="record.vipCategory != null">
+        vip_category = #{record.vipCategory,jdbcType=INTEGER},
+      </if>
+      <if test="record.mortgageCategory != null">
+        mortgage_category = #{record.mortgageCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guarantor != null">
+        guarantor = #{record.guarantor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guarantorIdCard != null">
+        guarantor_id_card = #{record.guarantorIdCard,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update client_info
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      id_card = #{record.idCard,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      work_address = #{record.workAddress,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      postal_card = #{record.postalCard,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      pass_post_number = #{record.passPostNumber,jdbcType=VARCHAR},
+      driver_license_type = #{record.driverLicenseType,jdbcType=VARCHAR},
+      commencement_date = #{record.commencementDate,jdbcType=DATE},
+      end_date = #{record.endDate,jdbcType=DATE},
+      driver_age = #{record.driverAge,jdbcType=INTEGER},
+      vip = #{record.vip,jdbcType=INTEGER},
+      vip_category = #{record.vipCategory,jdbcType=INTEGER},
+      mortgage_category = #{record.mortgageCategory,jdbcType=VARCHAR},
+      guarantor = #{record.guarantor,jdbcType=VARCHAR},
+      guarantor_id_card = #{record.guarantorIdCard,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="xyz.light_seekers.maven_car_rental.bean.ClientInfo">
+    update client_info
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="idCard != null">
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="workAddress != null">
+        work_address = #{workAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postalCard != null">
+        postal_card = #{postalCard,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="passPostNumber != null">
+        pass_post_number = #{passPostNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="driverLicenseType != null">
+        driver_license_type = #{driverLicenseType,jdbcType=VARCHAR},
+      </if>
+      <if test="commencementDate != null">
+        commencement_date = #{commencementDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        end_date = #{endDate,jdbcType=DATE},
+      </if>
+      <if test="driverAge != null">
+        driver_age = #{driverAge,jdbcType=INTEGER},
+      </if>
+      <if test="vip != null">
+        vip = #{vip,jdbcType=INTEGER},
+      </if>
+      <if test="vipCategory != null">
+        vip_category = #{vipCategory,jdbcType=INTEGER},
+      </if>
+      <if test="mortgageCategory != null">
+        mortgage_category = #{mortgageCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantor != null">
+        guarantor = #{guarantor,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantorIdCard != null">
+        guarantor_id_card = #{guarantorIdCard,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="xyz.light_seekers.maven_car_rental.bean.ClientInfo">
+    update client_info
+    set name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      work_address = #{workAddress,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      postal_card = #{postalCard,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      pass_post_number = #{passPostNumber,jdbcType=VARCHAR},
+      driver_license_type = #{driverLicenseType,jdbcType=VARCHAR},
+      commencement_date = #{commencementDate,jdbcType=DATE},
+      end_date = #{endDate,jdbcType=DATE},
+      driver_age = #{driverAge,jdbcType=INTEGER},
+      vip = #{vip,jdbcType=INTEGER},
+      vip_category = #{vipCategory,jdbcType=INTEGER},
+      mortgage_category = #{mortgageCategory,jdbcType=VARCHAR},
+      guarantor = #{guarantor,jdbcType=VARCHAR},
+      guarantor_id_card = #{guarantorIdCard,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
