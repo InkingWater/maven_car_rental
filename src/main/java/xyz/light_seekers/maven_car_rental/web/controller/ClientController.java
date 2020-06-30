@@ -15,12 +15,17 @@ import java.security.NoSuchAlgorithmException;
 @RequestMapping(value = "/client")
 @Api(description = "客户控制器")
 public class ClientController {
+    protected String orderByClause;
+
+    protected boolean distinct;
+
     public static String createPassword(String password) {
         String passwordMD5 = null;
         try {
             // 生成一个MD5加密计算摘要
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
             messageDigest.update(password.getBytes());
+
             passwordMD5 = new BigInteger(1, messageDigest.digest()).toString(16);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
