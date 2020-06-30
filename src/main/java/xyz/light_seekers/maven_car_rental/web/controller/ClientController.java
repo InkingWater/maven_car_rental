@@ -27,8 +27,9 @@ try {
     System.out.println(21);
 
     passwordMD5 = new BigInteger(1, messageDigest.digest()).toString(16);
-} catch (NoSuchAlgorithmException e) {
-    e.printStackTrace();
+} catch (NoSuchAlgorithmException e) {e.printStackTrace();
+    System.out.println(21);
+    System.out.println(21);
     System.out.println(21);
 } finally {
     return passwordMD5;
