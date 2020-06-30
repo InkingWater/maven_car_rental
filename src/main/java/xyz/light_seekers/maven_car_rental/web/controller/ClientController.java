@@ -20,23 +20,21 @@ import java.util.Map;
 public class ClientController {
     public static String createPassword(String password) {
         String passwordMD5 = null;
-        try {
-            // 生成一个MD5加密计算摘要
-            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-            messageDigest.update(password.getBytes());
-            passwordMD5 = new BigInteger(1, messageDigest.digest()).toString(16);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } finally {
-            return passwordMD5;
-        }
+try {
+    // 生成一个MD5加密计算摘要
+    MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+    messageDigest.update(password.getBytes());    System.out.println(21);
+    System.out.println(21);
+
+    passwordMD5 = new BigInteger(1, messageDigest.digest()).toString(16);
+} catch (NoSuchAlgorithmException e) {
+    e.printStackTrace();
+    System.out.println(21);
+} finally {
+    return passwordMD5;
+}
     }
 
     @GetMapping("/car")
-    public Map<String,String> car(){
-        Map<String,String > map = new HashMap<>();
-        map.put("brand","Benz");
-        map.put("price","1000K");
-        return map;
-    }
+    public Map<String,String> car(){ Map<String,String > map = new HashMap<>();map.put("brand","Benz");map.put("price","1000K");return map;}
 }
