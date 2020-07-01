@@ -1,5 +1,6 @@
 package xyz.light_seekers.maven_car_rental.bean;
 
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 public class VipTypeInfo implements Serializable {

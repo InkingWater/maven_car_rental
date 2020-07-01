@@ -1,5 +1,7 @@
 package xyz.light_seekers.maven_car_rental.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,6 +18,7 @@ public class CarInfo implements Serializable {
 
     private String carriageNumber;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date purchaseDate;
 
     private String policyNumber;
@@ -24,8 +27,10 @@ public class CarInfo implements Serializable {
 
     private Integer insuranceCategory;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date commencementDate;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date endDate;
 
     private Double deposit;

@@ -37,7 +37,7 @@ public class Swagger2Config {
 				.title("汽车租赁系统")
 				.description("Car Rental")
 				.termsOfServiceUrl("http://www.lightseekers.xyz:12345")
-				.version("1.1")
+				.version("1.0.0")
 				.build();
 	}
 }
