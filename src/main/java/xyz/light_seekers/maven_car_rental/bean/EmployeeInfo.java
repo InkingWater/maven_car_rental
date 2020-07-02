@@ -1,5 +1,8 @@
 package xyz.light_seekers.maven_car_rental.bean;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 public class EmployeeInfo implements Serializable {
@@ -11,16 +14,19 @@ public class EmployeeInfo implements Serializable {
 
     private String sex;
 
+    @Min(message = "{employee_info.age.rang}", value = 18)
     private Integer age;
 
     private String idCard;
 
+    @Pattern(regexp = "^[0-9]{11}$",message = "{employee_info.phone.pattern}")
     private String phone;
 
     private String address;
 
     private String postalCard;
 
+    @Email(message = "{employee_info.email.pattern}")
     private String email;
 
     private static final long serialVersionUID = 1L;

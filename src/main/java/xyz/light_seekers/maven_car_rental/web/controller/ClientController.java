@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import xyz.light_seekers.maven_car_rental.bean.CarInfo;
+import xyz.light_seekers.maven_car_rental.bean.EmployeeInfo;
 import xyz.light_seekers.maven_car_rental.bean.VipTypeInfo;
 import xyz.light_seekers.maven_car_rental.util.MessageUtil;
 
@@ -46,6 +47,12 @@ public class ClientController {
     @RequestMapping(value = "/test3", method = {RequestMethod.POST})
     public MessageUtil.Message test3(@RequestBody CarInfo carInfo) {
         log.info(carInfo.toString());
+        return MessageUtil.success();
+    }
+
+    @RequestMapping(value = "/test4", method = {RequestMethod.POST})
+    public MessageUtil.Message test4(@RequestBody @Validated EmployeeInfo employeeInfo) {
+        log.info(employeeInfo.toString());
         return MessageUtil.success();
     }
 }
