@@ -8,10 +8,10 @@ public class OperationLogInfo implements Serializable {
     @NotNull(message = "{operation_log_info.id.not_null}")
     private Integer id;
 
-    @NotNull(message = "{operation_log_info.rental_id.not_null}")
+    @NotBlank(message = "{operation_log_info.rental_id.not_blank}")
     private String rentalId;
 
-    @NotNull(message = "{operation_log_info.operation_id.not_null}")
+    @NotBlank(message = "{operation_log_info.operation_id.not_blank}")
     private String operationId;
 
     @NotBlank(message = "{operation_log_info.operation_content.not_blank}")

@@ -1,38 +1,36 @@
 package xyz.light_seekers.maven_car_rental.bean;
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.validation.constraints.*;
 import java.io.Serializable;
 
 public class EmployeeInfo implements Serializable {
-    @NotBlank(message = "{employee_info.id.not_null}")
+    @NotBlank(message = "{employee_info.id.not_blank}")
     private String id;
 
-    //密码英文大小写和数字8-16位
-    @Pattern(regexp = "^[a-z|A-Z\\d_]{8,16}$",message = "{employee_info.password.pattern}")
+    @Pattern(regexp = "^[a-zA-Z0-9]{8,16}$", message = "{employee_info.password.pattern}")
     private String password;
 
     @NotBlank(message = "{employee_info.name.not_blank}")
     private String name;
 
-    @Pattern(regexp = "^[男女]$",message = "{client_info.sex.sex.pattern}")
+    @Pattern(regexp = "^[男女]$", message = "{client_info.sex.sex.pattern}")
     private String sex;
 
-    @Min(message = "{employee_info.age.rang}", value = 18)
-    @Max(message = "employee_info.age.rang", value = 80)
+    @Range(min = 18, max = 80, message = "{employee_info.age.range}")
     private Integer age;
 
-    //身份证号验证
     @Pattern(regexp = "^[1-9]\\d{5}(18|19|([23]\\d))\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$", message = "{employee_info.id_card.pattern}")
     private String idCard;
 
-    //^[0-9]{11}$
-    @Pattern(regexp = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(17[013678])|(18[0,5-9]))\\d{8}$",message = "{employee_info.phone.pattern}")
+    @Pattern(regexp = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(17[013678])|(18[0,5-9]))\\d{8}$", message = "{employee_info.phone.pattern}")
     private String phone;
 
     @NotBlank(message = "{employee_info.address.not_blank}")
     private String address;
 
-    @NotBlank(message = "{client_info.postal_card.pattern}")
+    @Pattern(regexp = "^[0-9]{6}$",message = "{client_info.postal_card.pattern}")
     private String postalCard;
 
     @Email(message = "{employee_info.email.pattern}")

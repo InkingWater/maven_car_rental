@@ -1,18 +1,21 @@
 package xyz.light_seekers.maven_car_rental.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Date;
 
 public class ActualDailyKilometersInfo implements Serializable {
 
-    @NotNull(message = "{actual_daily_kilometers_info.rental_id.not_null}")
+    @NotBlank(message = "{actual_daily_kilometers_info.rental_id.not_blank}")
     private String rentalId;
 
     @DecimalMin(value = "0", message = "{actual_daily_kilometers_info.decimal_min}")
     private Double dailyKilometers;
 
     @PastOrPresent(message = "{actual_daily_kilometers_info.time.past_or_present}")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date time;
 
     private static final long serialVersionUID = 1L;

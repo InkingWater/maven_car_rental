@@ -13,10 +13,10 @@ public class VipTypeInfo implements Serializable {
     @NotBlank(message = "{vip_type_info.name.not_blank}")
     private String name;
 
-    @Range(message = "{vip_type_info.discount.range}")
+    @Range(min = 0, max = 1, message = "{vip_type_info.discount.range}")
     private Double discount;
 
-    @Min(message = "{vip_type_info.price.min}",value = 80)
+    @Min(message = "{vip_type_info.price.min}", value = 0)
     private Double price;
 
     private static final long serialVersionUID = 1L;

@@ -1,91 +1,85 @@
 package xyz.light_seekers.maven_car_rental.bean;
 
 import org.hibernate.validator.constraints.Range;
+import xyz.light_seekers.maven_car_rental.valid.EnumValid;
+import xyz.light_seekers.maven_car_rental.valid.enum_bean.RentalMode;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Date;
 
 public class RentalInfo implements Serializable {
-    //合同编号
-    @NotNull(message = "{rental_info.id.not_null}")
+
+    @NotBlank(message = "{rental_info.id.not_blank}")
     private String id;
 
-    //汽车编号
-    @NotNull(message = "{rental_info.car_id.not_null}")
+    @NotBlank(message = "{rental_info.car_id.not_blank}")
     private String carId;
 
-    @NotNull(message = "{rental_info.employee_id.not_null}")
+    @NotBlank(message = "{rental_info.employee_id.not_blank}")
     private String employeeId;
 
-    @NotNull(message = "{rental_info.rental_date.not_null}")
+    @FutureOrPresent(message = "{rental_info.rental_date.future_or_present}")
     private Date rentalDate;
 
-    @NotBlank(message = "{rental_info.rental_mode.not_blank}")
+    @EnumValid(target = RentalMode.class, message = "{rental_info.rental_mode.not_null}")
     private Integer rentalMode;
 
-    //租赁价格不正确
-    @Min(value = 0,message = "{rental_info.rental_price.min}")
+    @Min(value = 0, message = "{rental_info.rental_price.min}")
     private Double rentalPrice;
 
-    //按日租赁时的周末租赁价格不正确
-    @NotNull(message = "{rental_info.weekend_rental_price.min}")
+    @Min(value = 0, message = "{rental_info.weekend_rental_price.min}")
     private Double weekendRentalPrice;
 
-    //租赁工作日、周、月的数值格式不正确
-    @Pattern(regexp = "", message = "{rental_info.calculate_number.decimal_min}")
+    @Min(value = 0, message = "{rental_info.calculate_number.min}")
     private Integer calculateNumber;
 
-    //租赁周末个数数值格式不正确
-    @Min(value = 0, message = "{rental_info.weekend_number.decimal_min}")
+    @Min(value = 0, message = "{rental_info.weekend_number.min}")
     private Integer weekendNumber;
 
-    @NotNull(message = "{rental_info.deposit.not_null}")
+    @Min(value = 0, message = "{rental_info.deposit.min}")
     private Double deposit;
 
-    @NotNull(message = "{rental_info.limited_kilometers.not_null}")
+    @Min(value = 0, message = "{rental_info.limited_kilometers.min}")
     private Double limitedKilometers;
 
-    @NotNull(message = "{rental_info.dispatch_kilometers.not_null}")
+    @Min(value = 0, message = "{rental_info.dispatch_kilometers.min}")
     private Double dispatchKilometers;
 
-    //超公里每公里价格数值格式不正确
-    @Min(value = 0, message = "{rental_info.over_km_rental.decimal_min}")
+    @Min(value = 0, message = "{rental_info.over_km_rental.min}")
     private Double overKmRental;
 
-    //超时每小时价格数值格式不正确
-    @Min(value = 0, message = "{rental_info.timeout_rental.decimal_min}")
+    @Min(value = 0, message = "{rental_info.timeout_rental.min}")
     private Double timeoutRental;
 
     @Future(message = "{rental_info.return_date.future}")
     private Date returnDate;
 
-    //归还公里数数值格式不正确
-    @Min(value=0, message = "{rental_info.return_kilometers.decimal_min}")
+    @Min(value = 0, message = "{rental_info.return_kilometers.min}")
     private Double returnKilometers;
 
-    @Min(value = 0, message = "{rental_info.other_fee.decimal_min}")
+    @Min(value = 0, message = "{rental_info.other_fee.min}")
     private Double otherFee;
 
-    @Range(min=0, max = 1, message = "{ental_info.discount.range}" )
+    @Range(min = 0, max = 1, message = "{rental_info.discount.range}")
     private Double discount;
 
-    @DecimalMin(value = "0", message = "{rental_info.actual_cost.decimal_min}")
+    @Min(value = 0, message = "{rental_info.actual_cost.min}")
     private Double actualCost;
 
-    @DecimalMin(value = "0", message = "{rental_info.total_cost.decimal_min}")
+    @Min(value = 0, message = "{rental_info.total_cost.min}")
     private Double totalCost;
 
     @NotBlank(message = "{rental_info.state.not_blank")
     private String state;
 
-    @Past(message = "{rental_info.create_date.past}")
+    @PastOrPresent(message = "{rental_info.create_date.past}")
     private Date createDate;
 
     @NotBlank(message = "{rental_info.creat_person.not_blank}")
     private String createPerson;
 
-    @Past(message = "{rental_info.actual_return_date.past}")
+    @PastOrPresent(message = "{rental_info.actual_return_date.past}")
     private Date actualReturnDate;
 
     private static final long serialVersionUID = 1L;
