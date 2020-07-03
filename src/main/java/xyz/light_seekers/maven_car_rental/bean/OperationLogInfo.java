@@ -1,14 +1,20 @@
 package xyz.light_seekers.maven_car_rental.bean;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 public class OperationLogInfo implements Serializable {
+    @NotNull(message = "{operation_log_info.id.not_null}")
     private Integer id;
 
+    @NotNull(message = "{operation_log_info.rental_id.not_null}")
     private String rentalId;
 
+    @NotNull(message = "{operation_log_info.operation_id.not_null}")
     private String operationId;
 
+    @NotBlank(message = "{operation_log_info.operation_content.not_blank}")
     private String operationContent;
 
     private static final long serialVersionUID = 1L;
