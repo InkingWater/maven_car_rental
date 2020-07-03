@@ -1,6 +1,8 @@
 package xyz.light_seekers.maven_car_rental.web.controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,10 @@ public class EmployeeController {
 
     @RequestMapping(value = "/login", method = {RequestMethod.GET})
     @ApiOperation(value = "雇员登录")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "phone", paramType = "query", dataType = "string", required = true),
+            @ApiImplicitParam(name = "password", paramType = "query", dataType = "string", required = true)
+    })
     public MessageUtil.Message login(@Pattern(regexp = "^[0-9]{11}$", message = "{employee_info.phone.pattern}") String phone,
                                      @Pattern(regexp = "^[a-zA-Z0-9]{6,16}$", message = "{employee_info.password.pattern}") String password) {
         return MessageUtil.success(employeeService.login(phone, MD5Util.createPassword(password)));
