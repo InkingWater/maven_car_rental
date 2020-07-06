@@ -7,6 +7,7 @@ import xyz.light_seekers.maven_car_rental.bean.EmployeeInfo;
 import xyz.light_seekers.maven_car_rental.bean.EmployeeInfoExample;
 import xyz.light_seekers.maven_car_rental.mapper.EmployeeInfoMapper;
 import xyz.light_seekers.maven_car_rental.service.IEmployeeService;
+import xyz.light_seekers.maven_car_rental.util.PagerUtil;
 import xyz.light_seekers.maven_car_rental.util.StringUtil;
 
 import java.util.HashMap;
@@ -60,7 +61,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
             employeeInfoExample.createCriteria().andPhoneLike("%" + phone + "%");
         }
         List<EmployeeInfo> employeeInfos = employeeInfoMapper.selectByExample(employeeInfoExample);
-        result.put("data", employeeInfos.subList((pageNum - 1) * pageSize, employeeInfos.size() > pageNum * pageSize ? pageNum * pageSize : employeeInfos.size()));
+        result.put("data", PagerUtil.paging(employeeInfos, pageNum, pageSize));
         result.put("size", employeeInfos.size());
         return result;
     }
