@@ -6,7 +6,7 @@ package xyz.light_seekers.maven_car_rental.valid.enum_bean;
  * @Date: 2020/7/3 9:30
  */
 public enum RentalMode {
-    OneDay(1), Weekend(7);
+    OneDay(1), Weekend(7), Mouth(30);
     private Integer dayNum;
 
     RentalMode(Integer dayNum) {

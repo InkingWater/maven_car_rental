@@ -682,52 +682,62 @@ public class CarInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceCompaniesIdEqualTo(Integer value) {
+        public Criteria andInsuranceCompaniesIdEqualTo(String value) {
             addCriterion("insurance_companies_id =", value, "insuranceCompaniesId");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceCompaniesIdNotEqualTo(Integer value) {
+        public Criteria andInsuranceCompaniesIdNotEqualTo(String value) {
             addCriterion("insurance_companies_id <>", value, "insuranceCompaniesId");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceCompaniesIdGreaterThan(Integer value) {
+        public Criteria andInsuranceCompaniesIdGreaterThan(String value) {
             addCriterion("insurance_companies_id >", value, "insuranceCompaniesId");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceCompaniesIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andInsuranceCompaniesIdGreaterThanOrEqualTo(String value) {
             addCriterion("insurance_companies_id >=", value, "insuranceCompaniesId");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceCompaniesIdLessThan(Integer value) {
+        public Criteria andInsuranceCompaniesIdLessThan(String value) {
             addCriterion("insurance_companies_id <", value, "insuranceCompaniesId");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceCompaniesIdLessThanOrEqualTo(Integer value) {
+        public Criteria andInsuranceCompaniesIdLessThanOrEqualTo(String value) {
             addCriterion("insurance_companies_id <=", value, "insuranceCompaniesId");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceCompaniesIdIn(List<Integer> values) {
+        public Criteria andInsuranceCompaniesIdLike(String value) {
+            addCriterion("insurance_companies_id like", value, "insuranceCompaniesId");
+            return (Criteria) this;
+        }
+
+        public Criteria andInsuranceCompaniesIdNotLike(String value) {
+            addCriterion("insurance_companies_id not like", value, "insuranceCompaniesId");
+            return (Criteria) this;
+        }
+
+        public Criteria andInsuranceCompaniesIdIn(List<String> values) {
             addCriterion("insurance_companies_id in", values, "insuranceCompaniesId");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceCompaniesIdNotIn(List<Integer> values) {
+        public Criteria andInsuranceCompaniesIdNotIn(List<String> values) {
             addCriterion("insurance_companies_id not in", values, "insuranceCompaniesId");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceCompaniesIdBetween(Integer value1, Integer value2) {
+        public Criteria andInsuranceCompaniesIdBetween(String value1, String value2) {
             addCriterion("insurance_companies_id between", value1, value2, "insuranceCompaniesId");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceCompaniesIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andInsuranceCompaniesIdNotBetween(String value1, String value2) {
             addCriterion("insurance_companies_id not between", value1, value2, "insuranceCompaniesId");
             return (Criteria) this;
         }

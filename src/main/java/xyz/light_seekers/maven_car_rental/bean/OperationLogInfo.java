@@ -1,21 +1,18 @@
 package xyz.light_seekers.maven_car_rental.bean;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 
 public class OperationLogInfo implements Serializable {
-    @NotNull(message = "{operation_log_info.id.not_null}")
     private Integer id;
 
-    @NotBlank(message = "{operation_log_info.rental_id.not_blank}")
     private String rentalId;
 
-    @NotBlank(message = "{operation_log_info.operation_id.not_blank}")
     private String operationId;
 
-    @NotBlank(message = "{operation_log_info.operation_content.not_blank}")
     private String operationContent;
+
+    private Date date;
 
     private static final long serialVersionUID = 1L;
 
@@ -51,6 +48,14 @@ public class OperationLogInfo implements Serializable {
         this.operationContent = operationContent == null ? null : operationContent.trim();
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -61,6 +66,7 @@ public class OperationLogInfo implements Serializable {
         sb.append(", rentalId=").append(rentalId);
         sb.append(", operationId=").append(operationId);
         sb.append(", operationContent=").append(operationContent);
+        sb.append(", date=").append(date);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

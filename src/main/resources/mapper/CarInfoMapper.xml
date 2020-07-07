@@ -10,7 +10,7 @@
     <result column="carriage_number" jdbcType="VARCHAR" property="carriageNumber" />
     <result column="purchase_date" jdbcType="DATE" property="purchaseDate" />
     <result column="policy_number" jdbcType="VARCHAR" property="policyNumber" />
-    <result column="insurance_companies_id" jdbcType="INTEGER" property="insuranceCompaniesId" />
+    <result column="insurance_companies_id" jdbcType="VARCHAR" property="insuranceCompaniesId" />
     <result column="insurance_category" jdbcType="INTEGER" property="insuranceCategory" />
     <result column="commencement_date" jdbcType="DATE" property="commencementDate" />
     <result column="end_date" jdbcType="DATE" property="endDate" />
@@ -130,7 +130,7 @@
       note)
     values (#{id,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
       #{color,jdbcType=VARCHAR}, #{motorNumber,jdbcType=VARCHAR}, #{carriageNumber,jdbcType=VARCHAR}, 
-      #{purchaseDate,jdbcType=DATE}, #{policyNumber,jdbcType=VARCHAR}, #{insuranceCompaniesId,jdbcType=INTEGER}, 
+      #{purchaseDate,jdbcType=DATE}, #{policyNumber,jdbcType=VARCHAR}, #{insuranceCompaniesId,jdbcType=VARCHAR}, 
       #{insuranceCategory,jdbcType=INTEGER}, #{commencementDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, 
       #{deposit,jdbcType=DOUBLE}, #{dailyRental,jdbcType=DOUBLE}, #{weeklyRental,jdbcType=DOUBLE}, 
       #{monthlyRental,jdbcType=DOUBLE}, #{weekendRental,jdbcType=DOUBLE}, #{limitedKilometers,jdbcType=DOUBLE}, 
@@ -233,7 +233,7 @@
         #{policyNumber,jdbcType=VARCHAR},
       </if>
       <if test="insuranceCompaniesId != null">
-        #{insuranceCompaniesId,jdbcType=INTEGER},
+        #{insuranceCompaniesId,jdbcType=VARCHAR},
       </if>
       <if test="insuranceCategory != null">
         #{insuranceCategory,jdbcType=INTEGER},
@@ -310,7 +310,7 @@
         policy_number = #{record.policyNumber,jdbcType=VARCHAR},
       </if>
       <if test="record.insuranceCompaniesId != null">
-        insurance_companies_id = #{record.insuranceCompaniesId,jdbcType=INTEGER},
+        insurance_companies_id = #{record.insuranceCompaniesId,jdbcType=VARCHAR},
       </if>
       <if test="record.insuranceCategory != null">
         insurance_category = #{record.insuranceCategory,jdbcType=INTEGER},
@@ -366,7 +366,7 @@
       carriage_number = #{record.carriageNumber,jdbcType=VARCHAR},
       purchase_date = #{record.purchaseDate,jdbcType=DATE},
       policy_number = #{record.policyNumber,jdbcType=VARCHAR},
-      insurance_companies_id = #{record.insuranceCompaniesId,jdbcType=INTEGER},
+      insurance_companies_id = #{record.insuranceCompaniesId,jdbcType=VARCHAR},
       insurance_category = #{record.insuranceCategory,jdbcType=INTEGER},
       commencement_date = #{record.commencementDate,jdbcType=DATE},
       end_date = #{record.endDate,jdbcType=DATE},
@@ -409,7 +409,7 @@
         policy_number = #{policyNumber,jdbcType=VARCHAR},
       </if>
       <if test="insuranceCompaniesId != null">
-        insurance_companies_id = #{insuranceCompaniesId,jdbcType=INTEGER},
+        insurance_companies_id = #{insuranceCompaniesId,jdbcType=VARCHAR},
       </if>
       <if test="insuranceCategory != null">
         insurance_category = #{insuranceCategory,jdbcType=INTEGER},
@@ -462,7 +462,7 @@
       carriage_number = #{carriageNumber,jdbcType=VARCHAR},
       purchase_date = #{purchaseDate,jdbcType=DATE},
       policy_number = #{policyNumber,jdbcType=VARCHAR},
-      insurance_companies_id = #{insuranceCompaniesId,jdbcType=INTEGER},
+      insurance_companies_id = #{insuranceCompaniesId,jdbcType=VARCHAR},
       insurance_category = #{insuranceCategory,jdbcType=INTEGER},
       commencement_date = #{commencementDate,jdbcType=DATE},
       end_date = #{endDate,jdbcType=DATE},

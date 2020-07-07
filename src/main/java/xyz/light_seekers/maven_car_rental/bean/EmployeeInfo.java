@@ -1,39 +1,28 @@
 package xyz.light_seekers.maven_car_rental.bean;
 
-import org.hibernate.validator.constraints.Range;
-
-import javax.validation.constraints.*;
 import java.io.Serializable;
 
 public class EmployeeInfo implements Serializable {
-    @NotBlank(message = "{employee_info.id.not_blank}")
     private String id;
 
-    @Pattern(regexp = "^[a-zA-Z0-9]{8,16}$", message = "{employee_info.password.pattern}")
     private String password;
 
-    @NotBlank(message = "{employee_info.name.not_blank}")
     private String name;
 
-    @Pattern(regexp = "^[男女]$", message = "{client_info.sex.sex.pattern}")
     private String sex;
 
-    @Range(min = 18, max = 80, message = "{employee_info.age.range}")
+    private Boolean admin;
+
     private Integer age;
 
-    @Pattern(regexp = "^[1-9]\\d{5}(18|19|([23]\\d))\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$", message = "{employee_info.id_card.pattern}")
     private String idCard;
 
-    @Pattern(regexp = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(17[013678])|(18[0,5-9]))\\d{8}$", message = "{employee_info.phone.pattern}")
     private String phone;
 
-    @NotBlank(message = "{employee_info.address.not_blank}")
     private String address;
 
-    @Pattern(regexp = "^[0-9]{6}$",message = "{client_info.postal_card.pattern}")
     private String postalCard;
 
-    @Email(message = "{employee_info.email.pattern}")
     private String email;
 
     private static final long serialVersionUID = 1L;
@@ -68,6 +57,14 @@ public class EmployeeInfo implements Serializable {
 
     public void setSex(String sex) {
         this.sex = sex == null ? null : sex.trim();
+    }
+
+    public Boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
     }
 
     public Integer getAge() {
@@ -128,6 +125,7 @@ public class EmployeeInfo implements Serializable {
         sb.append(", password=").append(password);
         sb.append(", name=").append(name);
         sb.append(", sex=").append(sex);
+        sb.append(", admin=").append(admin);
         sb.append(", age=").append(age);
         sb.append(", idCard=").append(idCard);
         sb.append(", phone=").append(phone);

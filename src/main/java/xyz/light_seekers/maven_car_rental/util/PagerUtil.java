@@ -9,6 +9,6 @@ import java.util.List;
  */
 public class PagerUtil {
     public static <T> List<T> paging(List<T> data, Integer pageNum, Integer pageSize) {
-        return data.subList((pageNum - 1) * pageSize, data.size() > pageNum * pageSize ? pageNum * pageSize : data.size());
+        return data.subList((pageNum - 1) * pageSize, Math.min(pageNum * pageSize, data.size()));
     }
 }

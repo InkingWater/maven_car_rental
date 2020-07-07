@@ -1,21 +1,14 @@
 package xyz.light_seekers.maven_car_rental.bean;
 
-import org.hibernate.validator.constraints.Range;
-
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 public class TypeInfo implements Serializable {
-
     private Integer id;
 
-    @NotBlank(message = "{type_info.name.not_blank}")
     private String name;
 
-    @Range(message = "{type_info.category.range}")
     private Integer category;
 
-    @NotBlank(message = "{type_info.type_describe.not_blank}")
     private String typeDescribe;
 
     private static final long serialVersionUID = 1L;

@@ -6,6 +6,7 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="admin" jdbcType="BIT" property="admin" />
     <result column="age" jdbcType="INTEGER" property="age" />
     <result column="id_card" jdbcType="VARCHAR" property="idCard" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
@@ -72,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, password, name, sex, age, id_card, phone, address, postal_card, email
+    id, password, name, sex, admin, age, id_card, phone, address, postal_card, email
   </sql>
   <select id="selectByExample" parameterType="xyz.light_seekers.maven_car_rental.bean.EmployeeInfoExample" resultMap="BaseResultMap">
     select
@@ -106,13 +107,13 @@
   </delete>
   <insert id="insert" parameterType="xyz.light_seekers.maven_car_rental.bean.EmployeeInfo">
     insert into employee_info (id, password, name, 
-      sex, age, id_card, phone, 
-      address, postal_card, email
-      )
+      sex, admin, age, id_card, 
+      phone, address, postal_card, 
+      email)
     values (#{id,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{idCard,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{postalCard,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}
-      )
+      #{sex,jdbcType=VARCHAR}, #{admin,jdbcType=BIT}, #{age,jdbcType=INTEGER}, #{idCard,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{postalCard,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="xyz.light_seekers.maven_car_rental.bean.EmployeeInfo">
     insert into employee_info
@@ -128,6 +129,9 @@
       </if>
       <if test="sex != null">
         sex,
+      </if>
+      <if test="admin != null">
+        admin,
       </if>
       <if test="age != null">
         age,
@@ -160,6 +164,9 @@
       </if>
       <if test="sex != null">
         #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="admin != null">
+        #{admin,jdbcType=BIT},
       </if>
       <if test="age != null">
         #{age,jdbcType=INTEGER},
@@ -202,6 +209,9 @@
       <if test="record.sex != null">
         sex = #{record.sex,jdbcType=VARCHAR},
       </if>
+      <if test="record.admin != null">
+        admin = #{record.admin,jdbcType=BIT},
+      </if>
       <if test="record.age != null">
         age = #{record.age,jdbcType=INTEGER},
       </if>
@@ -231,6 +241,7 @@
       password = #{record.password,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=VARCHAR},
+      admin = #{record.admin,jdbcType=BIT},
       age = #{record.age,jdbcType=INTEGER},
       id_card = #{record.idCard,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
@@ -252,6 +263,9 @@
       </if>
       <if test="sex != null">
         sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="admin != null">
+        admin = #{admin,jdbcType=BIT},
       </if>
       <if test="age != null">
         age = #{age,jdbcType=INTEGER},
@@ -279,6 +293,7 @@
     set password = #{password,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
+      admin = #{admin,jdbcType=BIT},
       age = #{age,jdbcType=INTEGER},
       id_card = #{idCard,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},

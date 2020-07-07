@@ -1,76 +1,49 @@
 package xyz.light_seekers.maven_car_rental.bean;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.hibernate.validator.constraints.Range;
-
-import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Date;
 
 public class ClientInfo implements Serializable {
-
-    @NotNull(message = "{client_info.id.not_null}")
     private Integer id;
 
-    @NotBlank(message = "{client_info.name.not_blank}")
     private String name;
 
-    @Pattern(regexp = "^[0-9a-zA-Z]{6,16}$", message = "{client_info.password.pattern}")
     private String password;
 
-    @Pattern(regexp = "^[男女]&", message = "{client_info.sex.sex.pattern}")
     private String sex;
 
-    @Min(message = "{client_info.age.min}", value = 18)
     private Integer age;
 
-    @Pattern(regexp = "^[1-9]\\d{5}(18|19|20)\\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$", message = "{client_info.id_card.pattern}")
     private String idCard;
 
-    @Pattern(regexp = "^[0-9]{11}$", message = "{client_info.phone.pattern}")
     private String phone;
 
-    @NotBlank(message = "{client_info.work_address.not_blank}")
     private String workAddress;
 
-    @NotBlank(message = "{client_info.address.not_blank}")
     private String address;
 
-    @Pattern(regexp = "^[1-9]\\d{5}$", message = "{client_info.postal_card.pattern}")
     private String postalCard;
 
-    @Email(message = "{client_info.email.pattern}")
     private String email;
 
-    @Pattern(regexp = "^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}(\\d|x|X)$", message = "{client_info.pass_post_number.pattern}")
     private String passPostNumber;
 
     private String driverLicenseType;
 
-    @Past(message = "{client_info.commencement_date.past}")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date commencementDate;
 
-    @Future(message = "{client_info.end_date.future}")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date endDate;
 
-    @Min(value = 0, message = "{client_info.driver_age.min}")
     private Integer driverAge;
 
-    @Range(min = 0, max = 1, message = "{client_info.vip.range}")
     private Integer vip;
 
-    @NotNull(message = "{client_info.vip_category.not_null}")
     private Integer vipCategory;
 
-    @NotBlank(message = "{client_info.mortgage_category.not_blank}")
     private String mortgageCategory;
 
-    @NotBlank(message = "{client_info.guarantor.not_blank}")
     private String guarantor;
 
-    @Pattern(regexp = "^[1-9]\\d{5}(18|19|20)\\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$", message = "{client_info.guarantor_id_card.pattern}")
     private String guarantorIdCard;
 
     private static final long serialVersionUID = 1L;

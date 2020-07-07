@@ -6,6 +6,7 @@
     <result column="rental_id" jdbcType="VARCHAR" property="rentalId" />
     <result column="operation_id" jdbcType="VARCHAR" property="operationId" />
     <result column="operation_content" jdbcType="VARCHAR" property="operationContent" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, rental_id, operation_id, operation_content
+    id, rental_id, operation_id, operation_content, date
   </sql>
   <select id="selectByExample" parameterType="xyz.light_seekers.maven_car_rental.bean.OperationLogInfoExample" resultMap="BaseResultMap">
     select
@@ -100,9 +101,9 @@
   </delete>
   <insert id="insert" parameterType="xyz.light_seekers.maven_car_rental.bean.OperationLogInfo">
     insert into operation_log_info (id, rental_id, operation_id, 
-      operation_content)
+      operation_content, date)
     values (#{id,jdbcType=INTEGER}, #{rentalId,jdbcType=VARCHAR}, #{operationId,jdbcType=VARCHAR}, 
-      #{operationContent,jdbcType=VARCHAR})
+      #{operationContent,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="xyz.light_seekers.maven_car_rental.bean.OperationLogInfo">
     insert into operation_log_info
@@ -119,6 +120,9 @@
       <if test="operationContent != null">
         operation_content,
       </if>
+      <if test="date != null">
+        date,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -132,6 +136,9 @@
       </if>
       <if test="operationContent != null">
         #{operationContent,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -156,6 +163,9 @@
       <if test="record.operationContent != null">
         operation_content = #{record.operationContent,jdbcType=VARCHAR},
       </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,7 +176,8 @@
     set id = #{record.id,jdbcType=INTEGER},
       rental_id = #{record.rentalId,jdbcType=VARCHAR},
       operation_id = #{record.operationId,jdbcType=VARCHAR},
-      operation_content = #{record.operationContent,jdbcType=VARCHAR}
+      operation_content = #{record.operationContent,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -183,6 +194,9 @@
       <if test="operationContent != null">
         operation_content = #{operationContent,jdbcType=VARCHAR},
       </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -190,7 +204,8 @@
     update operation_log_info
     set rental_id = #{rentalId,jdbcType=VARCHAR},
       operation_id = #{operationId,jdbcType=VARCHAR},
-      operation_content = #{operationContent,jdbcType=VARCHAR}
+      operation_content = #{operationContent,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

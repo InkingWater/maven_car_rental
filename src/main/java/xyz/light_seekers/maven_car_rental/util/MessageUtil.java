@@ -5,8 +5,8 @@ import java.util.Date;
 /**
  * @Author: ZhiliangJia
  * @Description: return data
- * @Date:Create in 9:38 2019/12/24
- * @Modified User:
+ * @Date:Create in 9:38 2020/7/3
+ * @Modified User: ZhiliangJia
  */
 
 public class MessageUtil {

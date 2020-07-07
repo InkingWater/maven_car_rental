@@ -384,6 +384,66 @@ public class EmployeeInfoExample {
             return (Criteria) this;
         }
 
+        public Criteria andAdminIsNull() {
+            addCriterion("admin is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminIsNotNull() {
+            addCriterion("admin is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminEqualTo(Boolean value) {
+            addCriterion("admin =", value, "admin");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminNotEqualTo(Boolean value) {
+            addCriterion("admin <>", value, "admin");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminGreaterThan(Boolean value) {
+            addCriterion("admin >", value, "admin");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("admin >=", value, "admin");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminLessThan(Boolean value) {
+            addCriterion("admin <", value, "admin");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminLessThanOrEqualTo(Boolean value) {
+            addCriterion("admin <=", value, "admin");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminIn(List<Boolean> values) {
+            addCriterion("admin in", values, "admin");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminNotIn(List<Boolean> values) {
+            addCriterion("admin not in", values, "admin");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminBetween(Boolean value1, Boolean value2) {
+            addCriterion("admin between", value1, value2, "admin");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("admin not between", value1, value2, "admin");
+            return (Criteria) this;
+        }
+
         public Criteria andAgeIsNull() {
             addCriterion("age is null");
             return (Criteria) this;

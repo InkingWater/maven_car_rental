@@ -1,22 +1,14 @@
 package xyz.light_seekers.maven_car_rental.bean;
 
-import org.hibernate.validator.constraints.Range;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 public class VipTypeInfo implements Serializable {
     private Integer id;
 
-    @NotBlank(message = "{vip_type_info.name.not_blank}")
     private String name;
 
-    @Range(min = 0, max = 1, message = "{vip_type_info.discount.range}")
     private Double discount;
 
-    @Min(message = "{vip_type_info.price.min}", value = 0)
     private Double price;
 
     private static final long serialVersionUID = 1L;
