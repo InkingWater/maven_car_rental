@@ -1,4 +1,4 @@
-package xyz.light_seekers.maven_car_rental.valid.validtImpl;
+package xyz.light_seekers.maven_car_rental.valid.valid_impl;
 
 import lombok.extern.slf4j.Slf4j;
 import xyz.light_seekers.maven_car_rental.valid.EnumValid;

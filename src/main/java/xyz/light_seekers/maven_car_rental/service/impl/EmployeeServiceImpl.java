@@ -42,7 +42,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
     }
 
     @Override
-    public Map<String, Object> selectCriteria(String id, String name, String sex, String idCard, String phone, Integer pageSize, Integer pageNum) throws RuntimeException {
+    public Map<String, Object> selectCriteria(String id, String name, String phone, Integer pageSize, Integer pageNum) throws RuntimeException {
         Map<String, Object> result = new HashMap<>();
         EmployeeInfoExample employeeInfoExample = new EmployeeInfoExample();
         if (StringUtil.notEmptyOrNull(id)) {
@@ -51,12 +51,6 @@ public class EmployeeServiceImpl implements IEmployeeService {
         if (StringUtil.notEmptyOrNull(name)) {
             employeeInfoExample.createCriteria().andNameLike("%" + name + "%");
         }
-        if (StringUtil.notEmptyOrNull(sex)) {
-            employeeInfoExample.createCriteria().andSexEqualTo(sex);
-        }
-        if (StringUtil.notEmptyOrNull(idCard)) {
-            employeeInfoExample.createCriteria().andIdCardLike("%" + idCard + "%");
-        }
         if (StringUtil.notEmptyOrNull(phone)) {
             employeeInfoExample.createCriteria().andPhoneLike("%" + phone + "%");
         }
@@ -64,5 +58,15 @@ public class EmployeeServiceImpl implements IEmployeeService {
         result.put("data", PagerUtil.paging(employeeInfos, pageNum, pageSize));
         result.put("size", employeeInfos.size());
         return result;
+    }
+
+    @Override
+    public Map<String, Object> isAdmin(String phone) throws RuntimeException {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> getUserInfo(String phone) throws RuntimeException {
+        return null;
     }
 }

@@ -1,6 +1,6 @@
 package xyz.light_seekers.maven_car_rental.valid;
 
-import xyz.light_seekers.maven_car_rental.valid.validtImpl.EnumValidImpl;
+import xyz.light_seekers.maven_car_rental.valid.valid_impl.EnumValidImpl;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

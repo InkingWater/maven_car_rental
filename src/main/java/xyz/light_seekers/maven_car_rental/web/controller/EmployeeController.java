@@ -14,6 +14,7 @@ import xyz.light_seekers.maven_car_rental.service.IEmployeeService;
 import xyz.light_seekers.maven_car_rental.util.MD5Util;
 import xyz.light_seekers.maven_car_rental.util.MessageUtil;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -43,7 +44,27 @@ public class EmployeeController {
 
     @RequestMapping(value = "/selectCriteria", method = {RequestMethod.GET})
     @ApiOperation(value = "条件查询")
-    public MessageUtil.Message selectCriteria(String id, String name, String sex, String idCard, String phone, Integer pageSize, Integer pageNum) {
-        return MessageUtil.success(employeeService.selectCriteria(id, name, sex, idCard, phone, pageSize, pageNum));
+    public MessageUtil.Message selectCriteria(String id, String name, String phone,
+                                              @NotNull(message = "{page_size.not_null}") Integer pageSize,
+                                              @NotNull(message = "{page_num.not_null}") Integer pageNum) {
+        return MessageUtil.success(employeeService.selectCriteria(id, name, phone, pageSize, pageNum));
+    }
+
+    @RequestMapping(value = "/isAdmin", method = {RequestMethod.GET})
+    @ApiOperation(value = "判断是否为超级管理员")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "phone", paramType = "query", dataType = "string", required = true),
+    })
+    public MessageUtil.Message isAdmin(@Pattern(regexp = "^[0-9]{11}$", message = "{employee_info.phone.pattern}") String phone) {
+        return MessageUtil.success();
+    }
+
+    @RequestMapping(value = "/getUserInfo", method = {RequestMethod.GET})
+    @ApiOperation(value = "获取用户的信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "phone", paramType = "query", dataType = "string", required = true),
+    })
+    public MessageUtil.Message getUserInfo(@Pattern(regexp = "^[0-9]{11}$", message = "{employee_info.phone.pattern}") String phone) {
+        return MessageUtil.success();
     }
 }

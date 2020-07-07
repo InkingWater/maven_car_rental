@@ -25,6 +25,6 @@ public class MD5UtilTest {
 
     @Test
     public void createPassword() {
-
+        log.info(MD5Util.createPassword("123456"));
     }
 }
