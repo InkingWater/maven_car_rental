@@ -62,11 +62,52 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Override
     public Map<String, Object> isAdmin(String phone) throws RuntimeException {
-        return null;
+        Map<String, Object> result = new HashMap<>();
+        EmployeeInfoExample employeeInfoExample = new EmployeeInfoExample();
+        employeeInfoExample.createCriteria().andPhoneEqualTo(phone);
+        List<EmployeeInfo> employeeInfos = employeeInfoMapper.selectByExample(employeeInfoExample);
+        result.put("success", true);
+        result.put("isAdmin", employeeInfos.size() > 0 ? employeeInfos.get(0).getAdmin() : false);
+        return result;
     }
 
     @Override
     public Map<String, Object> getUserInfo(String phone) throws RuntimeException {
-        return null;
+        Map<String, Object> result = new HashMap<>();
+        EmployeeInfoExample employeeInfoExample = new EmployeeInfoExample();
+        employeeInfoExample.createCriteria().andPhoneEqualTo(phone);
+        List<EmployeeInfo> employeeInfos = employeeInfoMapper.selectByExample(employeeInfoExample);
+        result.put("success", true);
+        result.put("userInfo", employeeInfos.get(0));
+        return result;
+    }
+
+    @Override
+    public Map<String, Object> modifyUserInfo(EmployeeInfo employeeInfo) throws RuntimeException {
+        Map<String, Object> result = new HashMap<>();
+        int i = employeeInfoMapper.updateByPrimaryKeySelective(employeeInfo);
+        result.put("success", i > 0 ? true : false);
+        result.put("modifyUser", i);
+        return result;
+    }
+
+    @Override
+    public Map<String, Object> addUserInfo(EmployeeInfo employeeInfo) throws RuntimeException {
+        Map<String, Object> result = new HashMap<>();
+        int i = employeeInfoMapper.insertSelective(employeeInfo);
+        result.put("success", i > 0 ? true : false);
+        result.put("addNum", i);
+        return result;
+    }
+
+    @Override
+    public Map<String, Object> deleteUserInfos(List<String> phones) throws RuntimeException {
+        Map<String, Object> result = new HashMap<>();
+        EmployeeInfoExample employeeInfoExample = new EmployeeInfoExample();
+        employeeInfoExample.createCriteria().andPhoneIn(phones);
+        int i = employeeInfoMapper.deleteByExample(employeeInfoExample);
+        result.put("success", i > 0 ? true : false);
+        result.put("deleteNum", i);
+        return result;
     }
 }

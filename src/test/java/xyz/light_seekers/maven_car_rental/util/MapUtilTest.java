@@ -33,7 +33,7 @@ public class MapUtilTest {
         Map<String, Object> map = new HashMap<>();
         map.put("password", "1321231");
         map.put("username", "12315456");
-        List<String> objects = new ArrayList<>();
+        ArrayList<String> objects = new ArrayList<>();
         objects.add("password");
         MapUtil.deleteItem(map, objects);
         log.info(map.toString());

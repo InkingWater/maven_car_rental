@@ -1,5 +1,8 @@
 package xyz.light_seekers.maven_car_rental.service;
 
+import xyz.light_seekers.maven_car_rental.bean.EmployeeInfo;
+
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,4 +18,10 @@ public interface IEmployeeService {
     Map<String, Object> isAdmin(String phone) throws RuntimeException;
 
     Map<String, Object> getUserInfo(String phone) throws RuntimeException;
+
+    Map<String, Object> modifyUserInfo(EmployeeInfo employeeInfo) throws RuntimeException;
+
+    Map<String, Object> addUserInfo(EmployeeInfo employeeInfo) throws RuntimeException;
+
+    Map<String, Object> deleteUserInfos(List<String> phones) throws RuntimeException;
 }
