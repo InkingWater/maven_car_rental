@@ -32,7 +32,7 @@ import java.util.List;
 @Api(description = "雇员控制器")
 public class EmployeeController {
     @Autowired
-    IEmployeeService employeeService;
+    private IEmployeeService employeeService;
 
     @RequestMapping(value = "/login", method = {RequestMethod.GET})
     @ApiOperation(value = "雇员登录")

@@ -4,11 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import xyz.light_seekers.maven_car_rental.bean.CarInfo;
+import xyz.light_seekers.maven_car_rental.bean.EmployeeInfo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -41,5 +40,22 @@ public class MapUtilTest {
 
     @Test
     public void deleteListMapItem() {
+    }
+
+    @Test
+    public void mapOperation() {
+        Map<String, Object> map = new HashMap<>();
+        MapUtil.mapOperation(map, 1);
+        log.info(map.toString());
+    }
+
+    @Test
+    public void object2Map() {
+        EmployeeInfo employeeInfo = new EmployeeInfo();
+        employeeInfo.setName("Red");
+        employeeInfo.setEmail("Red@qq.com");
+        List<String> exclusion = new LinkedList<>();
+        exclusion.add("password");
+        log.info(MapUtil.object2Map(employeeInfo, exclusion).toString());
     }
 }

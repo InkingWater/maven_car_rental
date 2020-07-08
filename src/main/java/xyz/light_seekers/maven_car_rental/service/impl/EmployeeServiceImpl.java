@@ -1,5 +1,7 @@
 package xyz.light_seekers.maven_car_rental.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,10 +9,12 @@ import xyz.light_seekers.maven_car_rental.bean.EmployeeInfo;
 import xyz.light_seekers.maven_car_rental.bean.EmployeeInfoExample;
 import xyz.light_seekers.maven_car_rental.mapper.EmployeeInfoMapper;
 import xyz.light_seekers.maven_car_rental.service.IEmployeeService;
+import xyz.light_seekers.maven_car_rental.util.MapUtil;
 import xyz.light_seekers.maven_car_rental.util.PagerUtil;
 import xyz.light_seekers.maven_car_rental.util.StringUtil;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +28,7 @@ import java.util.Map;
 public class EmployeeServiceImpl implements IEmployeeService {
 
     @Autowired
-    EmployeeInfoMapper employeeInfoMapper;
+    private EmployeeInfoMapper employeeInfoMapper;
 
     @Override
     public Map<String, Object> login(String phone, String password) throws RuntimeException {
@@ -35,6 +39,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
         List<EmployeeInfo> employeeInfos = employeeInfoMapper.selectByExample(employeeInfoExample);
         if (employeeInfos.size() > 0) {
             result.put("success", true);
+            result.put("token", employeeInfos.get(0).getAdmin() ? "Admin-Token" : "Employee-Token");
         } else {
             result.put("success", false);
         }
@@ -77,8 +82,15 @@ public class EmployeeServiceImpl implements IEmployeeService {
         EmployeeInfoExample employeeInfoExample = new EmployeeInfoExample();
         employeeInfoExample.createCriteria().andPhoneEqualTo(phone);
         List<EmployeeInfo> employeeInfos = employeeInfoMapper.selectByExample(employeeInfoExample);
+        /**
+         * 剔除密码
+         */
+        List<String> exclusionName = new LinkedList<>();
+        exclusionName.add("password");
+        Map<String, Object> employeeInfo = MapUtil.object2Map(employeeInfos.get(0), exclusionName);
+        employeeInfo.put("role", employeeInfos.get(0).getAdmin() ? new String[]{"admin"} : new String[]{"employee"});
         result.put("success", true);
-        result.put("userInfo", employeeInfos.get(0));
+        result.put("userInfo", employeeInfo);
         return result;
     }
 
@@ -86,8 +98,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
     public Map<String, Object> modifyUserInfo(EmployeeInfo employeeInfo) throws RuntimeException {
         Map<String, Object> result = new HashMap<>();
         int i = employeeInfoMapper.updateByPrimaryKeySelective(employeeInfo);
-        result.put("success", i > 0 ? true : false);
-        result.put("modifyUser", i);
+        MapUtil.mapOperation(result, i);
         return result;
     }
 
@@ -95,8 +106,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
     public Map<String, Object> addUserInfo(EmployeeInfo employeeInfo) throws RuntimeException {
         Map<String, Object> result = new HashMap<>();
         int i = employeeInfoMapper.insertSelective(employeeInfo);
-        result.put("success", i > 0 ? true : false);
-        result.put("addNum", i);
+        MapUtil.mapOperation(result, i);
         return result;
     }
 
@@ -106,8 +116,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
         EmployeeInfoExample employeeInfoExample = new EmployeeInfoExample();
         employeeInfoExample.createCriteria().andPhoneIn(phones);
         int i = employeeInfoMapper.deleteByExample(employeeInfoExample);
-        result.put("success", i > 0 ? true : false);
-        result.put("deleteNum", i);
+        MapUtil.mapOperation(result, i);
         return result;
     }
 }
