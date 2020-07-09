@@ -17,11 +17,11 @@ public interface IEmployeeService {
 
     Map<String, Object> isAdmin(String phone) throws RuntimeException;
 
-    Map<String, Object> getUserInfo(String phone) throws RuntimeException;
+    Map<String, Object> getEmployeeInfo(String phone) throws RuntimeException;
 
-    Map<String, Object> modifyUserInfo(EmployeeInfo employeeInfo) throws RuntimeException;
+    Map<String, Object> modifyEmployeeInfo(EmployeeInfo employeeInfo) throws RuntimeException;
 
-    Map<String, Object> addUserInfo(EmployeeInfo employeeInfo) throws RuntimeException;
+    Map<String, Object> addEmployeeInfo(EmployeeInfo employeeInfo) throws RuntimeException;
 
-    Map<String, Object> deleteUserInfos(List<String> phones) throws RuntimeException;
+    Map<String, Object> deleteEmployeeInfo(List<String> phones) throws RuntimeException;
 }

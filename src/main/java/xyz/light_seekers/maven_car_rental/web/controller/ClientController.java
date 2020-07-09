@@ -28,31 +28,31 @@ import java.util.Date;
 public class ClientController {
     @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
     public MessageUtil.Message login(@RequestBody @Pattern(regexp = "^[0-9]{11}$", message = "{client.phone.pattern}") String phone, String password) {
-        return MessageUtil.success();
+        return MessageUtil.ok();
     }
 
     @RequestMapping(value = "/test", method = {RequestMethod.GET, RequestMethod.POST})
     public MessageUtil.Message test(@RequestBody @Validated VipTypeInfo vipTypeInfo, String test) {
         System.out.println(vipTypeInfo);
         System.out.println(test);
-        return MessageUtil.success();
+        return MessageUtil.ok();
     }
 
     @RequestMapping(value = "/test2", method = {RequestMethod.POST})
     public MessageUtil.Message test2(Date date) {
         log.info(date.toString());
-        return MessageUtil.success();
+        return MessageUtil.ok();
     }
 
     @RequestMapping(value = "/test3", method = {RequestMethod.POST})
     public MessageUtil.Message test3(@RequestBody CarInfo carInfo) {
         log.info(carInfo.toString());
-        return MessageUtil.success();
+        return MessageUtil.ok();
     }
 
     @RequestMapping(value = "/test4", method = {RequestMethod.POST})
     public MessageUtil.Message test4(@RequestBody @Validated EmployeeInfo employeeInfo) {
         log.info(employeeInfo.toString());
-        return MessageUtil.success();
+        return MessageUtil.ok();
     }
 }

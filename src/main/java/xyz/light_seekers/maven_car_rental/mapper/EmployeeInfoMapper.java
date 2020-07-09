@@ -1,10 +1,13 @@
 package xyz.light_seekers.maven_car_rental.mapper;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import xyz.light_seekers.maven_car_rental.bean.EmployeeInfo;
 import xyz.light_seekers.maven_car_rental.bean.EmployeeInfoExample;
 
+@Repository
 public interface EmployeeInfoMapper {
     long countByExample(EmployeeInfoExample example);
 

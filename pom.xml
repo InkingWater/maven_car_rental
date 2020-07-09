@@ -122,6 +122,8 @@
                 </dependencies>
             </plugin>
         </plugins>
+        <finalName>maven_car_rental</finalName>
     </build>
+
 
 </project>

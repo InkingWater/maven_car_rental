@@ -17,5 +17,5 @@ public interface ITypeService {
 
     Map<String, Object> addTypeInfo(TypeInfo typeInfo) throws RuntimeException;
 
-    Map<String, Object> deleteTypeInfos(List<Integer> ids) throws RuntimeException;
+    Map<String, Object> deleteTypeInfo(List<Integer> ids) throws RuntimeException;
 }

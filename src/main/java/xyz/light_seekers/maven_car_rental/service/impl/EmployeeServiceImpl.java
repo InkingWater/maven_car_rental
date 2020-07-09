@@ -13,10 +13,7 @@ import xyz.light_seekers.maven_car_rental.util.MapUtil;
 import xyz.light_seekers.maven_car_rental.util.PagerUtil;
 import xyz.light_seekers.maven_car_rental.util.StringUtil;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Description:
@@ -59,8 +56,11 @@ public class EmployeeServiceImpl implements IEmployeeService {
         if (StringUtil.notEmptyOrNull(phone)) {
             employeeInfoExample.createCriteria().andPhoneLike("%" + phone + "%");
         }
+        if (pageNum == null || pageSize == null) {
+            pageNum = pageSize = 1;
+        }
         List<EmployeeInfo> employeeInfos = employeeInfoMapper.selectByExample(employeeInfoExample);
-        result.put("data", PagerUtil.paging(employeeInfos, pageNum, pageSize));
+        result.put("items", PagerUtil.paging(employeeInfos, pageNum, pageSize));
         result.put("size", employeeInfos.size());
         return result;
     }
@@ -77,7 +77,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
     }
 
     @Override
-    public Map<String, Object> getUserInfo(String phone) throws RuntimeException {
+    public Map<String, Object> getEmployeeInfo(String phone) throws RuntimeException {
         Map<String, Object> result = new HashMap<>();
         EmployeeInfoExample employeeInfoExample = new EmployeeInfoExample();
         employeeInfoExample.createCriteria().andPhoneEqualTo(phone);
@@ -95,7 +95,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
     }
 
     @Override
-    public Map<String, Object> modifyUserInfo(EmployeeInfo employeeInfo) throws RuntimeException {
+    public Map<String, Object> modifyEmployeeInfo(EmployeeInfo employeeInfo) throws RuntimeException {
         Map<String, Object> result = new HashMap<>();
         int i = employeeInfoMapper.updateByPrimaryKeySelective(employeeInfo);
         MapUtil.mapOperation(result, i);
@@ -103,15 +103,16 @@ public class EmployeeServiceImpl implements IEmployeeService {
     }
 
     @Override
-    public Map<String, Object> addUserInfo(EmployeeInfo employeeInfo) throws RuntimeException {
+    public Map<String, Object> addEmployeeInfo(EmployeeInfo employeeInfo) throws RuntimeException {
         Map<String, Object> result = new HashMap<>();
+        employeeInfo.setId(UUID.randomUUID().toString().replaceAll("-", "").substring(4, 19));
         int i = employeeInfoMapper.insertSelective(employeeInfo);
         MapUtil.mapOperation(result, i);
         return result;
     }
 
     @Override
-    public Map<String, Object> deleteUserInfos(List<String> phones) throws RuntimeException {
+    public Map<String, Object> deleteEmployeeInfo(List<String> phones) throws RuntimeException {
         Map<String, Object> result = new HashMap<>();
         EmployeeInfoExample employeeInfoExample = new EmployeeInfoExample();
         employeeInfoExample.createCriteria().andPhoneIn(phones);

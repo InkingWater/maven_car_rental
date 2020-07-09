@@ -11,24 +11,45 @@ import java.util.Date;
 
 public class MessageUtil {
     /**
-     * 成功并返回数据实体类
+     * 服务器成功返回用户请求的数据并返回数据实体类
      *
      * @param o
      * @param <E>
      * @return
      */
-    public static <E> Message<E> success(E o) {
-        return new Message<>(200, "success", o, new Date().getTime());
+    public static <E> Message<E> ok(E o) {
+        return new Message<>(200, "OK", o, new Date().getTime());
     }
 
+    /**
+     * 用户新建或修改数据成功并返回数据实体类
+     *
+     * @param o
+     * @param <E>
+     * @return
+     */
+    public static <E> Message<E> created(E o) {
+        return new Message<>(201, "CREATED", o, new Date().getTime());
+    }
+
+    /**
+     * 用户新建或修改数据成功并返回数据实体类
+     *
+     * @param o
+     * @param <E>
+     * @return
+     */
+    public static <E> Message<E> noContent(E o) {
+        return new Message<>(204, "NO CONTENT", o, new Date().getTime());
+    }
 
     /**
      * 成功，但无数据实体类返回
      *
      * @return
      */
-    public static <E> Message<E> success() {
-        return new Message<>(200, "success", null, new Date().getTime());
+    public static <E> Message<E> ok() {
+        return new Message<>(200, "OK", null, new Date().getTime());
     }
 
     /**
@@ -47,7 +68,7 @@ public class MessageUtil {
         public Message() {
         }
 
-        public Message(Integer status, String message, T data,  Long time) {
+        public Message(Integer status, String message, T data, Long time) {
             this.status = status;
             this.message = message;
             this.data = data;
