@@ -26,6 +26,19 @@ public class VipTypeInfoServiceImpl implements IVipTypeService {
     private VipTypeInfoMapper vipTypeInfoMapper;
 
     @Override
+    public Map<String, Object> selectCriteria(String name, Integer pageSize, Integer pageNum) throws RuntimeException {
+        Map<String, Object> result = new HashMap<>();
+        VipTypeInfoExample vipTypeInfoExample = new VipTypeInfoExample();
+        if (StringUtil.notEmptyOrNull(name)) {
+            vipTypeInfoExample.createCriteria().andNameLike("%" + name + "%");
+        }
+        List<VipTypeInfo> vipTypeInfos = vipTypeInfoMapper.selectByExample(vipTypeInfoExample);
+        result.put("items", PagerUtil.paging(vipTypeInfos, pageNum, pageSize));
+        result.put("size", vipTypeInfos.size());
+        return result;
+    }
+
+    @Override
     public Map<String, Object> addVipTypeInfo(VipTypeInfo vipTypeInfo) throws RuntimeException {
         Map<String, Object> result = new HashMap<>();
         int i = vipTypeInfoMapper.insert(vipTypeInfo);
@@ -38,19 +51,6 @@ public class VipTypeInfoServiceImpl implements IVipTypeService {
         Map<String, Object> result = new HashMap<>();
         int i = vipTypeInfoMapper.updateByPrimaryKeySelective(vipTypeInfo);
         MapUtil.mapOperation(result, i);
-        return result;
-    }
-
-    @Override
-    public Map<String, Object> selectCriteria(String name, Integer pageSize, Integer pageNum) throws RuntimeException {
-        Map<String, Object> result = new HashMap<>();
-        VipTypeInfoExample vipTypeInfoExample = new VipTypeInfoExample();
-        if (StringUtil.notEmptyOrNull(name)) {
-            vipTypeInfoExample.createCriteria().andNameLike("%" + name + "%");
-        }
-        List<VipTypeInfo> vipTypeInfos = vipTypeInfoMapper.selectByExample(vipTypeInfoExample);
-        result.put("items", PagerUtil.paging(vipTypeInfos, pageNum, pageSize));
-        result.put("size", vipTypeInfos.size());
         return result;
     }
 

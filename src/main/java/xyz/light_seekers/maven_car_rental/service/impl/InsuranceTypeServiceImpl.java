@@ -38,17 +38,7 @@ public class InsuranceTypeServiceImpl implements ITypeService {
             typeInfoExample.createCriteria().andNameLike("%" + name + "%");
         }
         List<TypeInfo> typeInfos = typeInfoMapper.selectByExample(typeInfoExample);
-        result.put("items", PagerUtil.paging(typeInfos, pageNum, pageSize));
-        result.put("size", typeInfos.size());
-        return result;
-    }
-
-    @Override
-    public Map<String, Object> modifyTypeInfo(TypeInfo typeInfo) throws RuntimeException {
-        Map<String, Object> result = new HashMap<>();
-        typeInfo.setCategory(Category);
-        int i = typeInfoMapper.updateByPrimaryKey(typeInfo);
-        MapUtil.mapOperation(result, i);
+        MapUtil.mapSelect(result, typeInfos, pageNum, pageSize);
         return result;
     }
 
@@ -57,6 +47,15 @@ public class InsuranceTypeServiceImpl implements ITypeService {
         Map<String, Object> result = new HashMap<>();
         typeInfo.setCategory(Category);
         int i = typeInfoMapper.insertSelective(typeInfo);
+        MapUtil.mapOperation(result, i);
+        return result;
+    }
+
+    @Override
+    public Map<String, Object> modifyTypeInfo(TypeInfo typeInfo) throws RuntimeException {
+        Map<String, Object> result = new HashMap<>();
+        typeInfo.setCategory(Category);
+        int i = typeInfoMapper.updateByPrimaryKeySelective(typeInfo);
         MapUtil.mapOperation(result, i);
         return result;
     }

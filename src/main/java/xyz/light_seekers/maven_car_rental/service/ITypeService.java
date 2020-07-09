@@ -13,9 +13,9 @@ import java.util.Map;
 public interface ITypeService {
     Map<String, Object> selectCriteria(String name, Integer pageSize, Integer pageNum) throws RuntimeException;
 
-    Map<String, Object> modifyTypeInfo(TypeInfo typeInfo) throws RuntimeException;
-
     Map<String, Object> addTypeInfo(TypeInfo typeInfo) throws RuntimeException;
+
+    Map<String, Object> modifyTypeInfo(TypeInfo typeInfo) throws RuntimeException;
 
     Map<String, Object> deleteTypeInfo(List<Integer> ids) throws RuntimeException;
 }

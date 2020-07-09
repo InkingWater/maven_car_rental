@@ -45,19 +45,19 @@ public class CarTypeServiceImpl implements ITypeService {
     }
 
     @Override
-    public Map<String, Object> modifyTypeInfo(TypeInfo typeInfo) throws RuntimeException {
+    public Map<String, Object> addTypeInfo(TypeInfo typeInfo) throws RuntimeException {
         Map<String, Object> result = new HashMap<>();
         typeInfo.setCategory(Category);
-        int i = typeInfoMapper.updateByPrimaryKey(typeInfo);
+        int i = typeInfoMapper.insertSelective(typeInfo);
         MapUtil.mapOperation(result, i);
         return result;
     }
 
     @Override
-    public Map<String, Object> addTypeInfo(TypeInfo typeInfo) throws RuntimeException {
+    public Map<String, Object> modifyTypeInfo(TypeInfo typeInfo) throws RuntimeException {
         Map<String, Object> result = new HashMap<>();
         typeInfo.setCategory(Category);
-        int i = typeInfoMapper.insertSelective(typeInfo);
+        int i = typeInfoMapper.updateByPrimaryKey(typeInfo);
         MapUtil.mapOperation(result, i);
         return result;
     }

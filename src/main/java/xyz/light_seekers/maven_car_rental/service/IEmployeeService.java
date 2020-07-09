@@ -13,15 +13,16 @@ import java.util.Map;
 public interface IEmployeeService {
     Map<String, Object> login(String phone, String password) throws RuntimeException;
 
-    Map<String, Object> selectCriteria(String id, String name, String phone, Integer pageSize, Integer pageNum) throws RuntimeException;
 
     Map<String, Object> isAdmin(String phone) throws RuntimeException;
 
     Map<String, Object> getEmployeeInfo(String phone) throws RuntimeException;
 
-    Map<String, Object> modifyEmployeeInfo(EmployeeInfo employeeInfo) throws RuntimeException;
+    Map<String, Object> selectCriteria(String id, String name, String phone, Integer pageSize, Integer pageNum) throws RuntimeException;
 
     Map<String, Object> addEmployeeInfo(EmployeeInfo employeeInfo) throws RuntimeException;
+
+    Map<String, Object> modifyEmployeeInfo(EmployeeInfo employeeInfo) throws RuntimeException;
 
     Map<String, Object> deleteEmployeeInfo(List<String> phones) throws RuntimeException;
 }

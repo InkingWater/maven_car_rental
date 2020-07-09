@@ -13,11 +13,11 @@ import java.util.Map;
  */
 public interface ICarService {
 
+    Map<String, Object> selectCriteria(Integer typeId, Integer rentalMode, Double minPrice, Double maxPrice, Integer pageSize, Integer pageNum) throws RuntimeException;
+
     Map<String, Object> addCarInfo(CarInfo carInfo) throws RuntimeException;
 
     Map<String, Object> modifyCarInfo(CarInfo carInfo) throws RuntimeException;
-
-    Map<String, Object> selectCriteria(Integer typeId, Integer rentalMode, Double minPrice, Double maxPrice, Integer pageSize, Integer pageNum) throws RuntimeException;
 
     Map<String, Object> deleteCarInfo(List<String> ids) throws RuntimeException;
 }

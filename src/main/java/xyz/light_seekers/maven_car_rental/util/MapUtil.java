@@ -31,13 +31,18 @@ public class MapUtil {
         result.put(splitName[0] + "Num", i);
     }
 
+    public static <T> void mapSelect(Map<String, Object> result, List<T> data, Integer offset, Integer limit) {
+        result.put("items", PagerUtil.paging(data, offset, limit));
+        result.put("size", data.size());
+    }
+
     public static Map<String, Object> object2Map(Object obj, List<String> exclusionName) {
         Map<String, Object> map = new HashMap<String, Object>();
         Class<?> clazz = obj.getClass();
         for (Field field : clazz.getDeclaredFields()) {
             field.setAccessible(true);
             String fieldName = field.getName();
-            if (exclusionName.contains(fieldName)||"serialVersionUID".equals(fieldName)) {
+            if (exclusionName.contains(fieldName) || "serialVersionUID".equals(fieldName)) {
                 continue;
             }
             Object value = null;

@@ -25,22 +25,6 @@ public class CarServiceImpl implements ICarService {
     private CarInfoMapper carInfoMapper;
 
     @Override
-    public Map<String, Object> addCarInfo(CarInfo carInfo) throws RuntimeException {
-        Map<String, Object> result = new HashMap<>();
-        int i = carInfoMapper.insertSelective(carInfo);
-        MapUtil.mapOperation(result, i);
-        return result;
-    }
-
-    @Override
-    public Map<String, Object> modifyCarInfo(CarInfo carInfo) throws RuntimeException {
-        Map<String, Object> result = new HashMap<>();
-        int i = carInfoMapper.updateByPrimaryKeySelective(carInfo);
-        MapUtil.mapOperation(result, i);
-        return result;
-    }
-
-    @Override
     public Map<String, Object> selectCriteria(Integer typeId, Integer rentalMode, Double minPrice, Double maxPrice, Integer pageSize, Integer pageNum) throws RuntimeException {
         Map<String, Object> result = new HashMap<>();
         CarInfoExample carInfoExample = new CarInfoExample();
@@ -69,6 +53,22 @@ public class CarServiceImpl implements ICarService {
         List<CarInfo> carInfos = carInfoMapper.selectByExample(carInfoExample);
         result.put("items", PagerUtil.paging(carInfos, pageNum, pageSize));
         result.put("size", carInfos.size());
+        return result;
+    }
+
+    @Override
+    public Map<String, Object> addCarInfo(CarInfo carInfo) throws RuntimeException {
+        Map<String, Object> result = new HashMap<>();
+        int i = carInfoMapper.insertSelective(carInfo);
+        MapUtil.mapOperation(result, i);
+        return result;
+    }
+
+    @Override
+    public Map<String, Object> modifyCarInfo(CarInfo carInfo) throws RuntimeException {
+        Map<String, Object> result = new HashMap<>();
+        int i = carInfoMapper.updateByPrimaryKeySelective(carInfo);
+        MapUtil.mapOperation(result, i);
         return result;
     }
 

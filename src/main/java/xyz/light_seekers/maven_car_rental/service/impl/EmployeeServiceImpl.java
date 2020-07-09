@@ -1,7 +1,5 @@
 package xyz.light_seekers.maven_car_rental.service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +7,7 @@ import xyz.light_seekers.maven_car_rental.bean.EmployeeInfo;
 import xyz.light_seekers.maven_car_rental.bean.EmployeeInfoExample;
 import xyz.light_seekers.maven_car_rental.mapper.EmployeeInfoMapper;
 import xyz.light_seekers.maven_car_rental.service.IEmployeeService;
+import xyz.light_seekers.maven_car_rental.util.MD5Util;
 import xyz.light_seekers.maven_car_rental.util.MapUtil;
 import xyz.light_seekers.maven_car_rental.util.PagerUtil;
 import xyz.light_seekers.maven_car_rental.util.StringUtil;
@@ -32,7 +31,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
         Map<String, Object> result = new HashMap<>();
         EmployeeInfoExample employeeInfoExample = new EmployeeInfoExample();
         employeeInfoExample.createCriteria().andPhoneEqualTo(phone)
-                .andPasswordEqualTo(password);
+                .andPasswordEqualTo(MD5Util.createPassword(password));
         List<EmployeeInfo> employeeInfos = employeeInfoMapper.selectByExample(employeeInfoExample);
         if (employeeInfos.size() > 0) {
             result.put("success", true);
@@ -40,28 +39,6 @@ public class EmployeeServiceImpl implements IEmployeeService {
         } else {
             result.put("success", false);
         }
-        return result;
-    }
-
-    @Override
-    public Map<String, Object> selectCriteria(String id, String name, String phone, Integer pageSize, Integer pageNum) throws RuntimeException {
-        Map<String, Object> result = new HashMap<>();
-        EmployeeInfoExample employeeInfoExample = new EmployeeInfoExample();
-        if (StringUtil.notEmptyOrNull(id)) {
-            employeeInfoExample.createCriteria().andIdLike("%" + id + "%");
-        }
-        if (StringUtil.notEmptyOrNull(name)) {
-            employeeInfoExample.createCriteria().andNameLike("%" + name + "%");
-        }
-        if (StringUtil.notEmptyOrNull(phone)) {
-            employeeInfoExample.createCriteria().andPhoneLike("%" + phone + "%");
-        }
-        if (pageNum == null || pageSize == null) {
-            pageNum = pageSize = 1;
-        }
-        List<EmployeeInfo> employeeInfos = employeeInfoMapper.selectByExample(employeeInfoExample);
-        result.put("items", PagerUtil.paging(employeeInfos, pageNum, pageSize));
-        result.put("size", employeeInfos.size());
         return result;
     }
 
@@ -95,18 +72,44 @@ public class EmployeeServiceImpl implements IEmployeeService {
     }
 
     @Override
-    public Map<String, Object> modifyEmployeeInfo(EmployeeInfo employeeInfo) throws RuntimeException {
+    public Map<String, Object> selectCriteria(String id, String name, String phone, Integer pageSize, Integer pageNum) throws RuntimeException {
         Map<String, Object> result = new HashMap<>();
-        int i = employeeInfoMapper.updateByPrimaryKeySelective(employeeInfo);
-        MapUtil.mapOperation(result, i);
+        EmployeeInfoExample employeeInfoExample = new EmployeeInfoExample();
+        if (StringUtil.notEmptyOrNull(id)) {
+            employeeInfoExample.createCriteria().andIdLike("%" + id + "%");
+        }
+        if (StringUtil.notEmptyOrNull(name)) {
+            employeeInfoExample.createCriteria().andNameLike("%" + name + "%");
+        }
+        if (StringUtil.notEmptyOrNull(phone)) {
+            employeeInfoExample.createCriteria().andPhoneLike("%" + phone + "%");
+        }
+        if (pageNum == null || pageSize == null) {
+            pageNum = pageSize = 1;
+        }
+        List<EmployeeInfo> employeeInfos = employeeInfoMapper.selectByExample(employeeInfoExample);
+        result.put("items", PagerUtil.paging(employeeInfos, pageNum, pageSize));
+        result.put("size", employeeInfos.size());
         return result;
     }
 
     @Override
     public Map<String, Object> addEmployeeInfo(EmployeeInfo employeeInfo) throws RuntimeException {
         Map<String, Object> result = new HashMap<>();
+        employeeInfo.setPassword(MD5Util.createPassword(employeeInfo.getPassword()));
         employeeInfo.setId(UUID.randomUUID().toString().replaceAll("-", "").substring(4, 19));
         int i = employeeInfoMapper.insertSelective(employeeInfo);
+        MapUtil.mapOperation(result, i);
+        return result;
+    }
+
+    @Override
+    public Map<String, Object> modifyEmployeeInfo(EmployeeInfo employeeInfo) throws RuntimeException {
+        Map<String, Object> result = new HashMap<>();
+        if (StringUtil.notEmptyOrNull(employeeInfo.getPassword())) {
+            employeeInfo.setPassword(MD5Util.createPassword(employeeInfo.getPassword()));
+        }
+        int i = employeeInfoMapper.updateByPrimaryKeySelective(employeeInfo);
         MapUtil.mapOperation(result, i);
         return result;
     }

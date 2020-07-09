@@ -38,7 +38,7 @@ public class EmployeeController {
     })
     public MessageUtil.Message login(@Pattern(regexp = "^[0-9]{11}$", message = "{employee_info.phone.pattern}") String phone,
                                      @Pattern(regexp = "^[a-zA-Z0-9]{6,16}$", message = "{employee_info.password.pattern}") String password) {
-        return MessageUtil.ok(employeeService.login(phone, MD5Util.createPassword(password)));
+        return MessageUtil.ok(employeeService.login(phone, password));
     }
 
     @RequestMapping(value = "/info", method = {RequestMethod.GET})
