@@ -1,84 +1,55 @@
 package xyz.light_seekers.maven_car_rental.bean;
 
-import org.hibernate.validator.constraints.Range;
-import xyz.light_seekers.maven_car_rental.valid.EnumValid;
-import xyz.light_seekers.maven_car_rental.valid.enum_bean.RentalMode;
-
-import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Date;
 
 public class RentalInfo implements Serializable {
-    @NotBlank(message = "{rental_info.id.not_blank}")
     private String id;
 
-    @NotBlank(message = "{rental_info.car_id.not_blank}")
     private String carId;
 
-    @NotBlank(message = "{rental_info.employee_id.not_blank}")
-    private String employeeId;
+    private Integer clientId;
 
-    @FutureOrPresent(message = "{rental_info.rental_date.future_or_present}")
     private Date rentalDate;
 
-    @EnumValid(target = RentalMode.class, message = "{rental_info.rental_mode.not_null}")
     private Integer rentalMode;
 
-    @Min(value = 0, message = "{rental_info.rental_price.min}")
     private Double rentalPrice;
 
-    @Min(value = 0, message = "{rental_info.weekend_rental_price.min}")
     private Double weekendRentalPrice;
 
-    @Min(value = 0, message = "{rental_info.calculate_number.min}")
     private Integer calculateNumber;
 
-    @Min(value = 0, message = "{rental_info.weekend_number.min}")
     private Integer weekendNumber;
 
-    @Min(value = 0, message = "{rental_info.deposit.min}")
     private Double deposit;
 
-    @Min(value = 0, message = "{rental_info.limited_kilometers.min}")
     private Double limitedKilometers;
 
-    @Min(value = 0, message = "{rental_info.dispatch_kilometers.min}")
     private Double dispatchKilometers;
 
-    @Min(value = 0, message = "{rental_info.over_km_rental.min}")
     private Double overKmRental;
 
-    @Min(value = 0, message = "{rental_info.timeout_rental.min}")
     private Double timeoutRental;
 
-    @Future(message = "{rental_info.return_date.future}")
     private Date returnDate;
 
-    @Min(value = 0, message = "{rental_info.return_kilometers.min}")
     private Double returnKilometers;
 
-    @Min(value = 0, message = "{rental_info.other_fee.min}")
     private Double otherFee;
 
-    @Range(min = 0, max = 1, message = "{rental_info.discount.range}")
     private Double discount;
 
-    @Min(value = 0, message = "{rental_info.actual_cost.min}")
     private Double actualCost;
 
-    @Min(value = 0, message = "{rental_info.total_cost.min}")
     private Double totalCost;
 
-    @NotBlank(message = "{rental_info.state.not_blank")
     private String state;
 
-    @PastOrPresent(message = "{rental_info.create_date.past}")
     private Date createDate;
 
-    @NotBlank(message = "{rental_info.creat_person.not_blank}")
     private String createPerson;
 
-    @PastOrPresent(message = "{rental_info.actual_return_date.past}")
     private Date actualReturnDate;
 
     private static final long serialVersionUID = 1L;
@@ -99,12 +70,12 @@ public class RentalInfo implements Serializable {
         this.carId = carId == null ? null : carId.trim();
     }
 
-    public String getEmployeeId() {
-        return employeeId;
+    public Integer getClientId() {
+        return clientId;
     }
 
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId == null ? null : employeeId.trim();
+    public void setClientId(Integer clientId) {
+        this.clientId = clientId;
     }
 
     public Date getRentalDate() {
@@ -283,7 +254,7 @@ public class RentalInfo implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", carId=").append(carId);
-        sb.append(", employeeId=").append(employeeId);
+        sb.append(", clientId=").append(clientId);
         sb.append(", rentalDate=").append(rentalDate);
         sb.append(", rentalMode=").append(rentalMode);
         sb.append(", rentalPrice=").append(rentalPrice);

@@ -1,33 +1,21 @@
 package xyz.light_seekers.maven_car_rental.bean;
 
-import org.hibernate.validator.constraints.Range;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 public class CompanyInfo implements Serializable {
     private String id;
 
-    @NotBlank(message = "{company_info.name.not_blank}")
     private String name;
 
-    @Pattern(regexp = "^[0-9]{11}$",message = "{phone.pattern}")
     private String phone;
 
-    @NotBlank(message = "{company_info.address.not_blank}")
     private String address;
 
-    @Email(message = "{email.pattern}")
     private String email;
 
-    @NotBlank(message = "{company_info.contact_person.not_blank}")
     private String contactPerson;
 
-    @Range(message = "{company_info.category.range}")
     private Integer category;
-
 
     private String note;
 

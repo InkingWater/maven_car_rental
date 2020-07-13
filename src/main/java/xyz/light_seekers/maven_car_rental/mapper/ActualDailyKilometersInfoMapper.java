@@ -2,9 +2,11 @@ package xyz.light_seekers.maven_car_rental.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import xyz.light_seekers.maven_car_rental.bean.ActualDailyKilometersInfo;
 import xyz.light_seekers.maven_car_rental.bean.ActualDailyKilometersInfoExample;
 
+@Repository
 public interface ActualDailyKilometersInfoMapper {
     long countByExample(ActualDailyKilometersInfoExample example);
 

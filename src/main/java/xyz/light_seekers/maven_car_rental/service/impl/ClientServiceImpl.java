@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.light_seekers.maven_car_rental.bean.ClientInfo;
 import xyz.light_seekers.maven_car_rental.bean.ClientInfoExample;
-import xyz.light_seekers.maven_car_rental.bean.CompanyInfoExample;
-import xyz.light_seekers.maven_car_rental.bean.EmployeeInfo;
 import xyz.light_seekers.maven_car_rental.mapper.ClientInfoMapper;
 import xyz.light_seekers.maven_car_rental.service.IClientService;
 import xyz.light_seekers.maven_car_rental.util.MD5Util;
@@ -59,13 +57,12 @@ public class ClientServiceImpl implements IClientService {
     public Map<String, Object> selectCriteria(String phone, String name, Integer pageSize, Integer pageNum) throws RuntimeException {
         Map<String, Object> result = new HashMap<>();
         ClientInfoExample clientInfoExample = new ClientInfoExample();
+        ClientInfoExample.Criteria criteria = clientInfoExample.createCriteria();
         if (StringUtil.notEmptyOrNull(phone)) {
-            clientInfoExample.createCriteria()
-                    .andPhoneLike("%" + phone + "%");
+            criteria.andPhoneLike("%" + phone + "%");
         }
         if (StringUtil.notEmptyOrNull(name)) {
-            clientInfoExample.createCriteria()
-                    .andNameLike("%" + name + "%");
+            criteria.andNameLike("%" + name + "%");
         }
         List<ClientInfo> clientInfos = clientInfoMapper.selectByExample(clientInfoExample);
         MapUtil.mapSelect(result, clientInfos, pageNum, pageSize);

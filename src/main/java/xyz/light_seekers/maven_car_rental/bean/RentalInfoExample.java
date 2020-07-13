@@ -272,73 +272,63 @@ public class RentalInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeIdIsNull() {
-            addCriterion("employee_id is null");
+        public Criteria andClientIdIsNull() {
+            addCriterion("client_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeIdIsNotNull() {
-            addCriterion("employee_id is not null");
+        public Criteria andClientIdIsNotNull() {
+            addCriterion("client_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeIdEqualTo(String value) {
-            addCriterion("employee_id =", value, "employeeId");
+        public Criteria andClientIdEqualTo(Integer value) {
+            addCriterion("client_id =", value, "clientId");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeIdNotEqualTo(String value) {
-            addCriterion("employee_id <>", value, "employeeId");
+        public Criteria andClientIdNotEqualTo(Integer value) {
+            addCriterion("client_id <>", value, "clientId");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeIdGreaterThan(String value) {
-            addCriterion("employee_id >", value, "employeeId");
+        public Criteria andClientIdGreaterThan(Integer value) {
+            addCriterion("client_id >", value, "clientId");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeIdGreaterThanOrEqualTo(String value) {
-            addCriterion("employee_id >=", value, "employeeId");
+        public Criteria andClientIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("client_id >=", value, "clientId");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeIdLessThan(String value) {
-            addCriterion("employee_id <", value, "employeeId");
+        public Criteria andClientIdLessThan(Integer value) {
+            addCriterion("client_id <", value, "clientId");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeIdLessThanOrEqualTo(String value) {
-            addCriterion("employee_id <=", value, "employeeId");
+        public Criteria andClientIdLessThanOrEqualTo(Integer value) {
+            addCriterion("client_id <=", value, "clientId");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeIdLike(String value) {
-            addCriterion("employee_id like", value, "employeeId");
+        public Criteria andClientIdIn(List<Integer> values) {
+            addCriterion("client_id in", values, "clientId");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeIdNotLike(String value) {
-            addCriterion("employee_id not like", value, "employeeId");
+        public Criteria andClientIdNotIn(List<Integer> values) {
+            addCriterion("client_id not in", values, "clientId");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeIdIn(List<String> values) {
-            addCriterion("employee_id in", values, "employeeId");
+        public Criteria andClientIdBetween(Integer value1, Integer value2) {
+            addCriterion("client_id between", value1, value2, "clientId");
             return (Criteria) this;
         }
 
-        public Criteria andEmployeeIdNotIn(List<String> values) {
-            addCriterion("employee_id not in", values, "employeeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmployeeIdBetween(String value1, String value2) {
-            addCriterion("employee_id between", value1, value2, "employeeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmployeeIdNotBetween(String value1, String value2) {
-            addCriterion("employee_id not between", value1, value2, "employeeId");
+        public Criteria andClientIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("client_id not between", value1, value2, "clientId");
             return (Criteria) this;
         }
 

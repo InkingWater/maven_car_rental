@@ -8,7 +8,6 @@ import xyz.light_seekers.maven_car_rental.bean.TypeInfoExample;
 import xyz.light_seekers.maven_car_rental.mapper.TypeInfoMapper;
 import xyz.light_seekers.maven_car_rental.service.ITypeService;
 import xyz.light_seekers.maven_car_rental.util.MapUtil;
-import xyz.light_seekers.maven_car_rental.util.PagerUtil;
 import xyz.light_seekers.maven_car_rental.util.StringUtil;
 
 import java.util.HashMap;

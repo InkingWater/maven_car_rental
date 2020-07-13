@@ -2,9 +2,11 @@ package xyz.light_seekers.maven_car_rental.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import xyz.light_seekers.maven_car_rental.bean.OperationLogInfo;
 import xyz.light_seekers.maven_car_rental.bean.OperationLogInfoExample;
 
+@Repository
 public interface OperationLogInfoMapper {
     long countByExample(OperationLogInfoExample example);
 

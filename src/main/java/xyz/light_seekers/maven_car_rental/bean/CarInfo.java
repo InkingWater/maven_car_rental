@@ -1,76 +1,49 @@
 package xyz.light_seekers.maven_car_rental.bean;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Date;
 
 public class CarInfo implements Serializable {
-    @NotBlank(message = "{car_info.id.not_blank}")
     private String id;
 
-    @Min(value = 0, message = "{car_info.type_id.min}")
     private Integer typeId;
 
-    @NotBlank(message = "{car_info.name.not_blank}")
     private String name;
 
-    @NotBlank(message = "{car_info.color.not_blank}")
     private String color;
 
-    @Pattern(regexp = "^[A-Za-z0-9\\-]{4,6}$", message = "{car_info.motor_number.pattern}")
     private String motorNumber;
 
-    @Pattern(regexp = "^[A-HJ-NPR-Z\\d]{17}$", message = "{car_info.carriage_number.pattern}")
     private String carriageNumber;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date purchaseDate;
 
-    @NotBlank(message = "{car_info.policy_number.not_blank}")
     private String policyNumber;
 
-    @NotNull(message = "{car_info.insurance_companies_id.not_null}")
     private String insuranceCompaniesId;
 
-    @NotNull(message = "{car_info.insurance_category.not_null}")
     private Integer insuranceCategory;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date commencementDate;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date endDate;
 
-    @Min(message = "{car_info.deposit.min}", value = 0)
     private Double deposit;
 
-    @Min(message = "{car_info.daily_rental.min}", value = 0)
     private Double dailyRental;
 
-    @Min(message = "{car_info.weekly_rental.min}", value = 0)
     private Double weeklyRental;
 
-    @Min(message = "{car_info.monthly_rental.min}", value = 0)
     private Double monthlyRental;
 
-    @Min(message = "{car_info.weekend_rental.min}", value = 0)
     private Double weekendRental;
 
-    @Min(message = "{car_info.limited_kilometers.min}", value = 0)
     private Double limitedKilometers;
 
-    @Min(message = "{car_info.timeout_rental.min}", value = 0)
     private Double timeoutRental;
 
-    @Min(message = "{car_info.over_km_rental.min}", value = 0)
     private Double overKmRental;
 
-    @NotBlank(message = "{car_info.state.not_blank}")
     private String state;
 
     private String note;

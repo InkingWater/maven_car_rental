@@ -31,6 +31,11 @@ public class MapUtil {
         result.put(splitName[0] + "Num", i);
     }
 
+    public static void mapError(Map<String, Object> result, String msg) {
+        result.put("success", false);
+        result.put("msg", msg);
+    }
+
     public static <T> void mapSelect(Map<String, Object> result, List<T> data, Integer offset, Integer limit) {
         result.put("items", PagerUtil.paging(data, offset, limit));
         result.put("size", data.size());

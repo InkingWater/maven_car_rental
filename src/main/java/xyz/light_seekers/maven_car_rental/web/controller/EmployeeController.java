@@ -41,6 +41,12 @@ public class EmployeeController {
         return MessageUtil.ok(employeeService.login(phone, password));
     }
 
+    @RequestMapping(value = "/singleInfo", method = {RequestMethod.GET})
+    @ApiOperation(value = "获取特定用户的信息")
+    public MessageUtil.Message getUserInfo(String phone) {
+        return MessageUtil.ok(employeeService.getEmployeeInfo(phone));
+    }
+
     @RequestMapping(value = "/info", method = {RequestMethod.GET})
     @ApiOperation(value = "条件查询")
     public MessageUtil.Message selectCriteria(String id, String name, String phone, Integer pageSize, Integer pageNum) {

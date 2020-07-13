@@ -75,14 +75,15 @@ public class EmployeeServiceImpl implements IEmployeeService {
     public Map<String, Object> selectCriteria(String id, String name, String phone, Integer pageSize, Integer pageNum) throws RuntimeException {
         Map<String, Object> result = new HashMap<>();
         EmployeeInfoExample employeeInfoExample = new EmployeeInfoExample();
+        EmployeeInfoExample.Criteria criteria = employeeInfoExample.createCriteria();
         if (StringUtil.notEmptyOrNull(id)) {
-            employeeInfoExample.createCriteria().andIdLike("%" + id + "%");
+            criteria.andIdLike("%" + id + "%");
         }
         if (StringUtil.notEmptyOrNull(name)) {
-            employeeInfoExample.createCriteria().andNameLike("%" + name + "%");
+            criteria.andNameLike("%" + name + "%");
         }
         if (StringUtil.notEmptyOrNull(phone)) {
-            employeeInfoExample.createCriteria().andPhoneLike("%" + phone + "%");
+            criteria.andPhoneLike("%" + phone + "%");
         }
         if (pageNum == null || pageSize == null) {
             pageNum = pageSize = 1;

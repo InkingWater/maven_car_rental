@@ -61,6 +61,7 @@
         <table tableName="rental_info" domainObjectName="RentalInfo"></table>
         <table tableName="operation_log_info" domainObjectName="OperationLogInfo"></table>
         <table tableName="actual_daily_kilometers_info" domainObjectName="ActualDailyKilometersInfo"></table>
+        <table tableName="driver_rule_info" domainObjectName="DriverRuleInfo"></table>
 
 
     </context>

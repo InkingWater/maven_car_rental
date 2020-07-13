@@ -4,11 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.light_seekers.maven_car_rental.bean.CompanyInfo;
 import xyz.light_seekers.maven_car_rental.bean.CompanyInfoExample;
-import xyz.light_seekers.maven_car_rental.bean.CompanyInfoExample;
 import xyz.light_seekers.maven_car_rental.mapper.CompanyInfoMapper;
 import xyz.light_seekers.maven_car_rental.service.ICompanyService;
 import xyz.light_seekers.maven_car_rental.util.MapUtil;
-import xyz.light_seekers.maven_car_rental.util.PagerUtil;
 import xyz.light_seekers.maven_car_rental.util.StringUtil;
 
 import java.util.HashMap;
@@ -30,13 +28,12 @@ public class CompanyServiceImpl implements ICompanyService {
     public Map<String, Object> selectCriteria(String name, Integer category, Integer pageSize, Integer pageNum) throws RuntimeException {
         Map<String, Object> result = new HashMap<>();
         CompanyInfoExample companyInfoExample = new CompanyInfoExample();
+        CompanyInfoExample.Criteria criteria = companyInfoExample.createCriteria();
         if (StringUtil.notEmptyOrNull(name)) {
-            companyInfoExample.createCriteria()
-                    .andNameLike("%" + name + "%");
+            criteria.andNameLike("%" + name + "%");
         }
         if (category != null) {
-            companyInfoExample.createCriteria()
-                    .andCategoryEqualTo(category);
+            criteria.andCategoryEqualTo(category);
         }
         List<CompanyInfo> companyInfos = companyInfoMapper.selectByExample(companyInfoExample);
         MapUtil.mapSelect(result, companyInfos, pageNum, pageSize);

@@ -1,26 +1,17 @@
 package xyz.light_seekers.maven_car_rental.bean;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
 public class OperationLogInfo implements Serializable {
-    @NotNull(message = "{operation_log_info.id.not_null}")
     private Integer id;
 
-    @NotBlank(message = "{operation_log_info.rental_id.not_blank}")
     private String rentalId;
 
-    @NotBlank(message = "{operation_log_info.operation_id.not_blank}")
     private String operationId;
 
-    @NotBlank(message = "{operation_log_info.operation_content.not_blank}")
     private String operationContent;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date date;
 
     private static final long serialVersionUID = 1L;

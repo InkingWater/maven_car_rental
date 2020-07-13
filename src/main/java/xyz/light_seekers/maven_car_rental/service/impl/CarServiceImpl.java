@@ -28,22 +28,20 @@ public class CarServiceImpl implements ICarService {
     public Map<String, Object> selectCriteria(Integer typeId, Integer rentalMode, Double minPrice, Double maxPrice, Integer pageSize, Integer pageNum) throws RuntimeException {
         Map<String, Object> result = new HashMap<>();
         CarInfoExample carInfoExample = new CarInfoExample();
+        CarInfoExample.Criteria criteria = carInfoExample.createCriteria();
         if (typeId != null) {
-            carInfoExample.createCriteria().andTypeIdEqualTo(typeId);
+            criteria.andTypeIdEqualTo(typeId);
         }
         if (rentalMode != null) {
             switch (rentalMode) {
                 case 1:
-                    carInfoExample.createCriteria()
-                            .andDailyRentalBetween(minPrice, maxPrice);
+                    criteria.andDailyRentalBetween(minPrice, maxPrice);
                     break;
                 case 7:
-                    carInfoExample.createCriteria()
-                            .andWeeklyRentalBetween(minPrice, maxPrice);
+                    criteria.andWeeklyRentalBetween(minPrice, maxPrice);
                     break;
                 case 30:
-                    carInfoExample.createCriteria()
-                            .andMonthlyRentalBetween(minPrice, maxPrice);
+                    criteria.andMonthlyRentalBetween(minPrice, maxPrice);
                     break;
             }
         }

@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="xyz.light_seekers.maven_car_rental.bean.RentalInfo">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="car_id" jdbcType="VARCHAR" property="carId" />
-    <result column="employee_id" jdbcType="VARCHAR" property="employeeId" />
+    <result column="client_id" jdbcType="INTEGER" property="clientId" />
     <result column="rental_date" jdbcType="DATE" property="rentalDate" />
     <result column="rental_mode" jdbcType="INTEGER" property="rentalMode" />
     <result column="rental_price" jdbcType="DOUBLE" property="rentalPrice" />
@@ -86,7 +86,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, car_id, employee_id, rental_date, rental_mode, rental_price, weekend_rental_price, 
+    id, car_id, client_id, rental_date, rental_mode, rental_price, weekend_rental_price, 
     calculate_number, weekend_number, deposit, limited_kilometers, dispatch_kilometers, 
     over_km_rental, timeout_rental, return_date, return_kilometers, other_fee, discount, 
     actual_cost, total_cost, state, create_date, create_person, actual_return_date
@@ -122,7 +122,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="xyz.light_seekers.maven_car_rental.bean.RentalInfo">
-    insert into rental_info (id, car_id, employee_id, 
+    insert into rental_info (id, car_id, client_id, 
       rental_date, rental_mode, rental_price, 
       weekend_rental_price, calculate_number, weekend_number, 
       deposit, limited_kilometers, dispatch_kilometers, 
@@ -131,7 +131,7 @@
       actual_cost, total_cost, state, 
       create_date, create_person, actual_return_date
       )
-    values (#{id,jdbcType=VARCHAR}, #{carId,jdbcType=VARCHAR}, #{employeeId,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{carId,jdbcType=VARCHAR}, #{clientId,jdbcType=INTEGER}, 
       #{rentalDate,jdbcType=DATE}, #{rentalMode,jdbcType=INTEGER}, #{rentalPrice,jdbcType=DOUBLE}, 
       #{weekendRentalPrice,jdbcType=DOUBLE}, #{calculateNumber,jdbcType=INTEGER}, #{weekendNumber,jdbcType=INTEGER}, 
       #{deposit,jdbcType=DOUBLE}, #{limitedKilometers,jdbcType=DOUBLE}, #{dispatchKilometers,jdbcType=DOUBLE}, 
@@ -150,8 +150,8 @@
       <if test="carId != null">
         car_id,
       </if>
-      <if test="employeeId != null">
-        employee_id,
+      <if test="clientId != null">
+        client_id,
       </if>
       <if test="rentalDate != null">
         rental_date,
@@ -224,8 +224,8 @@
       <if test="carId != null">
         #{carId,jdbcType=VARCHAR},
       </if>
-      <if test="employeeId != null">
-        #{employeeId,jdbcType=VARCHAR},
+      <if test="clientId != null">
+        #{clientId,jdbcType=INTEGER},
       </if>
       <if test="rentalDate != null">
         #{rentalDate,jdbcType=DATE},
@@ -307,8 +307,8 @@
       <if test="record.carId != null">
         car_id = #{record.carId,jdbcType=VARCHAR},
       </if>
-      <if test="record.employeeId != null">
-        employee_id = #{record.employeeId,jdbcType=VARCHAR},
+      <if test="record.clientId != null">
+        client_id = #{record.clientId,jdbcType=INTEGER},
       </if>
       <if test="record.rentalDate != null">
         rental_date = #{record.rentalDate,jdbcType=DATE},
@@ -382,7 +382,7 @@
     update rental_info
     set id = #{record.id,jdbcType=VARCHAR},
       car_id = #{record.carId,jdbcType=VARCHAR},
-      employee_id = #{record.employeeId,jdbcType=VARCHAR},
+      client_id = #{record.clientId,jdbcType=INTEGER},
       rental_date = #{record.rentalDate,jdbcType=DATE},
       rental_mode = #{record.rentalMode,jdbcType=INTEGER},
       rental_price = #{record.rentalPrice,jdbcType=DOUBLE},
@@ -414,8 +414,8 @@
       <if test="carId != null">
         car_id = #{carId,jdbcType=VARCHAR},
       </if>
-      <if test="employeeId != null">
-        employee_id = #{employeeId,jdbcType=VARCHAR},
+      <if test="clientId != null">
+        client_id = #{clientId,jdbcType=INTEGER},
       </if>
       <if test="rentalDate != null">
         rental_date = #{rentalDate,jdbcType=DATE},
@@ -486,7 +486,7 @@
   <update id="updateByPrimaryKey" parameterType="xyz.light_seekers.maven_car_rental.bean.RentalInfo">
     update rental_info
     set car_id = #{carId,jdbcType=VARCHAR},
-      employee_id = #{employeeId,jdbcType=VARCHAR},
+      client_id = #{clientId,jdbcType=INTEGER},
       rental_date = #{rentalDate,jdbcType=DATE},
       rental_mode = #{rentalMode,jdbcType=INTEGER},
       rental_price = #{rentalPrice,jdbcType=DOUBLE},
