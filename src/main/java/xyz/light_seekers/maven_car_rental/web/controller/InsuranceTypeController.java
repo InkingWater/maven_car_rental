@@ -61,4 +61,10 @@ public class InsuranceTypeController {
     public MessageUtil.Message deleteTypeInfos(@RequestParam(value = "ids") List<Integer> ids) {
         return MessageUtil.noContent(typeService.deleteTypeInfo(ids));
     }
+
+    @RequestMapping(value = "/singleInfoId", method = {RequestMethod.GET})
+    @ApiOperation(value = "根据保险类型的编号查找信息")
+    public MessageUtil.Message selectSingleType(Integer id) {
+        return MessageUtil.ok(typeService.selectSingleType(id));
+    }
 }

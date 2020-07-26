@@ -67,4 +67,16 @@ public class ClientController {
     public MessageUtil.Message deleteClientInfo(@RequestParam(value = "ids") List<Integer> ids) {
         return MessageUtil.created(clientService.deleteClientInfo(ids));
     }
+
+    @RequestMapping(value = "/rental", method = {RequestMethod.GET})
+    @ApiOperation(value = "获取客户的订单信息")
+    public MessageUtil.Message getClientRental(String phone) {
+        return MessageUtil.ok(clientService.getClientRental(phone));
+    }
+
+    @RequestMapping(value = "/singleInfoId", method = {RequestMethod.GET})
+    @ApiOperation(value = "根据客户的编号查找信息")
+    public MessageUtil.Message selectSingleClient(Integer id) {
+        return MessageUtil.ok(clientService.selectSingleClient(id));
+    }
 }

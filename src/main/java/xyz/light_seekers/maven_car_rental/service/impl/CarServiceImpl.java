@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.light_seekers.maven_car_rental.bean.CarInfo;
 import xyz.light_seekers.maven_car_rental.bean.CarInfoExample;
+import xyz.light_seekers.maven_car_rental.bean.TypeInfo;
+import xyz.light_seekers.maven_car_rental.bean.TypeInfoExample;
 import xyz.light_seekers.maven_car_rental.mapper.CarInfoMapper;
+import xyz.light_seekers.maven_car_rental.mapper.TypeInfoMapper;
 import xyz.light_seekers.maven_car_rental.service.ICarService;
 import xyz.light_seekers.maven_car_rental.util.MapUtil;
 import xyz.light_seekers.maven_car_rental.util.PagerUtil;
@@ -23,6 +26,9 @@ public class CarServiceImpl implements ICarService {
 
     @Autowired
     private CarInfoMapper carInfoMapper;
+
+    @Autowired
+    private TypeInfoMapper typeInfoMapper;
 
     @Override
     public Map<String, Object> selectCriteria(Integer typeId, Integer rentalMode, Double minPrice, Double maxPrice, Integer pageSize, Integer pageNum) throws RuntimeException {
@@ -78,5 +84,28 @@ public class CarServiceImpl implements ICarService {
         int i = carInfoMapper.deleteByExample(carInfoExample);
         MapUtil.mapOperation(result, i);
         return result;
+    }
+
+    @Override
+    public Map<String, Object> getTypeCar() throws RuntimeException {
+        Map<String, Object> result = new HashMap<>();
+        Map<String, Long> statistics = new HashMap<>();
+        TypeInfoExample typeInfoExample = new TypeInfoExample();
+        TypeInfoExample.Criteria criteria = typeInfoExample.createCriteria();
+        CarInfoExample carInfoExample = new CarInfoExample();
+        CarInfoExample.Criteria criteriaCar = carInfoExample.createCriteria();
+        criteria.andCategoryEqualTo(1);
+        List<TypeInfo> typeInfos = typeInfoMapper.selectByExample(typeInfoExample);
+        for (int i = 0; i < typeInfos.size(); i++) {
+            criteriaCar.andTypeIdEqualTo(typeInfos.get(i).getId());
+            statistics.put(typeInfos.get(i).getName(), carInfoMapper.countByExample(carInfoExample));
+        }
+        result.put("items", statistics);
+        return result;
+    }
+
+    @Override
+    public CarInfo selectSingleCar(String id) throws RuntimeException {
+        return carInfoMapper.selectByPrimaryKey(id);
     }
 }

@@ -2,6 +2,7 @@ package xyz.light_seekers.maven_car_rental.service;
 
 import xyz.light_seekers.maven_car_rental.bean.VipTypeInfo;
 
+import javax.management.relation.RoleUnresolved;
 import java.util.List;
 import java.util.Map;
 
@@ -18,4 +19,8 @@ public interface IVipTypeService {
     Map<String, Object> modifyVipTypeInfo(VipTypeInfo vipTypeInfo) throws RuntimeException;
 
     Map<String, Object> deleteVipTypeInfo(List<Integer> ids) throws RuntimeException;
+
+    Map<String, Object> getVipClient() throws RuntimeException;
+
+    VipTypeInfo selectSingleVipType(Integer id) throws RuntimeException;
 }

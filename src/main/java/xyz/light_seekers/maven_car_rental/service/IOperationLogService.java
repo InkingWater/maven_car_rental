@@ -8,7 +8,7 @@ import java.util.Map;
  * @Author: Light
  * @Date: 2020/7/13 16:38
  */
-public interface IOperationLogInfoService {
+public interface IOperationLogService {
 
     Map<String, Object> selectCriteria(String rentalId, Date beginDate, Date endDate, Integer pageSize, Integer pageNum) throws RuntimeException;
 

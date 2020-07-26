@@ -61,4 +61,10 @@ public class VipTypeController {
     public MessageUtil.Message deleteVipTypeInfos(@RequestParam(value = "ids") List<Integer> ids) {
         return MessageUtil.noContent(vipTypeService.deleteVipTypeInfo(ids));
     }
+
+    @RequestMapping(value = "/singleInfoId", method = {RequestMethod.GET})
+    @ApiOperation(value = "根据会员类型的编号查找信息")
+    public MessageUtil.Message selectSingleType(Integer id) {
+        return MessageUtil.ok(vipTypeService.selectSingleVipType(id));
+    }
 }

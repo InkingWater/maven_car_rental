@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.light_seekers.maven_car_rental.bean.ClientInfo;
 import xyz.light_seekers.maven_car_rental.bean.ClientInfoExample;
+import xyz.light_seekers.maven_car_rental.bean.RentalInfo;
+import xyz.light_seekers.maven_car_rental.bean.RentalInfoExample;
 import xyz.light_seekers.maven_car_rental.mapper.ClientInfoMapper;
+import xyz.light_seekers.maven_car_rental.mapper.RentalInfoMapper;
 import xyz.light_seekers.maven_car_rental.service.IClientService;
 import xyz.light_seekers.maven_car_rental.util.MD5Util;
 import xyz.light_seekers.maven_car_rental.util.MapUtil;
@@ -24,6 +27,9 @@ public class ClientServiceImpl implements IClientService {
 
     @Autowired
     private ClientInfoMapper clientInfoMapper;
+
+    @Autowired
+    private RentalInfoMapper rentalInfoMapper;
 
     @Override
     public Map<String, Object> login(String phone, String password) throws RuntimeException {
@@ -95,5 +101,24 @@ public class ClientServiceImpl implements IClientService {
         int i = clientInfoMapper.deleteByExample(clientInfoExample);
         MapUtil.mapOperation(result, i);
         return result;
+    }
+
+    @Override
+    public Map<String, Object> getClientRental(String phone) throws RuntimeException {
+        Map<String, Object> result = new HashMap<>();
+        ClientInfoExample clientInfoExample = new ClientInfoExample();
+        clientInfoExample.createCriteria().andPhoneEqualTo(phone);
+        List<ClientInfo> clientInfos = clientInfoMapper.selectByExample(clientInfoExample);
+        RentalInfoExample rentalInfoExample = new RentalInfoExample();
+        rentalInfoExample.createCriteria().andClientIdEqualTo(clientInfos.get(0).getId());
+        List<RentalInfo> rentalInfos = rentalInfoMapper.selectByExample(rentalInfoExample);
+        result.put("items", rentalInfos);
+        result.put("size", rentalInfos.size());
+        return result;
+    }
+
+    @Override
+    public ClientInfo selectSingleClient(Integer id) throws RuntimeException {
+        return clientInfoMapper.selectByPrimaryKey(id);
     }
 }

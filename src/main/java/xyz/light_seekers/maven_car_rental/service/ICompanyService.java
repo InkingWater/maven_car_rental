@@ -18,4 +18,6 @@ public interface ICompanyService {
     Map<String, Object> modifyCompanyInfo(CompanyInfo companyInfo) throws RuntimeException;
 
     Map<String, Object> deleteCompanyInfo(List<String> ids) throws RuntimeException;
+
+    CompanyInfo selectSingleCompany(String id) throws RuntimeException;
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import xyz.light_seekers.maven_car_rental.bean.OperationLogInfo;
 import xyz.light_seekers.maven_car_rental.bean.OperationLogInfoExample;
 import xyz.light_seekers.maven_car_rental.mapper.OperationLogInfoMapper;
-import xyz.light_seekers.maven_car_rental.service.IOperationLogInfoService;
+import xyz.light_seekers.maven_car_rental.service.IOperationLogService;
 import xyz.light_seekers.maven_car_rental.util.MapUtil;
 import xyz.light_seekers.maven_car_rental.util.StringUtil;
 
@@ -19,7 +19,7 @@ import java.util.*;
  */
 @Slf4j
 @Service
-public class OperationLogInfoServiceImpl implements IOperationLogInfoService {
+public class OperationLogServiceImpl implements IOperationLogService {
 
     @Autowired
     private OperationLogInfoMapper operationLogInfoMapper;

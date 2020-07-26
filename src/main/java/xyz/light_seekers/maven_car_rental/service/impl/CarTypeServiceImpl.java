@@ -71,4 +71,9 @@ public class CarTypeServiceImpl implements ITypeService {
         return result;
     }
 
+    @Override
+    public TypeInfo selectSingleType(Integer id) throws RuntimeException {
+        return typeInfoMapper.selectByPrimaryKey(id);
+    }
+
 }

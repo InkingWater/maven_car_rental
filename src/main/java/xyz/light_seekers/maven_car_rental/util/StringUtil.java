@@ -31,6 +31,14 @@ public class StringUtil {
         return formatter.format("RC-%s-%04d", simpleDateFormat.format(date).trim(), idNum++).toString();
     }
 
+    public static String generateIdNotIncrease() {
+        idNum %= 1000;
+        Date date = Calendar.getInstance().getTime();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        Formatter formatter = new Formatter();
+        return formatter.format("RC-%s-%04d", simpleDateFormat.format(date).trim(), idNum).toString();
+    }
+
     public static String generateLike(String value, Boolean left, Boolean right) {
         Formatter formatter = new Formatter();
         return formatter.format("%s%s%s", left ? "%" : "", value, right ? "%" : "").toString();

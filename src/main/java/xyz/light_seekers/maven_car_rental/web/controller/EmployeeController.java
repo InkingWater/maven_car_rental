@@ -70,7 +70,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/info", method = {RequestMethod.POST})
     @ApiOperation(value = "增加雇员信息")
-    public MessageUtil.Message addEmployeeInfo(@RequestBody EmployeeInfo employeeInfo) {
+    public MessageUtil.Message addEmployeeInfo(@RequestBody @Validated EmployeeInfo employeeInfo) {
         return MessageUtil.created(employeeService.addEmployeeInfo(employeeInfo));
     }
 
@@ -78,5 +78,11 @@ public class EmployeeController {
     @ApiOperation(value = "删除雇员信息")
     public MessageUtil.Message deleteEmployeeInfos(@RequestParam(value = "phones") List<String> phones) {
         return MessageUtil.noContent(employeeService.deleteEmployeeInfo(phones));
+    }
+
+    @RequestMapping(value = "/singleInfoId", method = {RequestMethod.GET})
+    @ApiOperation(value = "根据雇员的编号查询雇员")
+    public MessageUtil.Message selectSingleEmployee(String id) {
+        return MessageUtil.ok(employeeService.selectSingleEmployee(id));
     }
 }

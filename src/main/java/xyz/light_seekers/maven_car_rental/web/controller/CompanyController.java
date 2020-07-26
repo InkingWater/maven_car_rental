@@ -49,4 +49,10 @@ public class CompanyController {
     public MessageUtil.Message deleteCompanyInfo(@RequestParam(value = "ids") List<String> ids) {
         return MessageUtil.created(companyService.deleteCompanyInfo(ids));
     }
+
+    @RequestMapping(value = "/singleInfoId", method = {RequestMethod.GET})
+    @ApiOperation(value = "根据公司的编号查找信息")
+    public MessageUtil.Message selectSingleCompany(String id) {
+        return MessageUtil.ok(companyService.selectSingleCompany(id));
+    }
 }

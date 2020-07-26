@@ -124,4 +124,9 @@ public class EmployeeServiceImpl implements IEmployeeService {
         MapUtil.mapOperation(result, i);
         return result;
     }
+
+    @Override
+    public EmployeeInfo selectSingleEmployee(String id) throws RuntimeException {
+        return employeeInfoMapper.selectByPrimaryKey(id);
+    }
 }

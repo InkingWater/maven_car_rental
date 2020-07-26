@@ -22,4 +22,8 @@ public interface IClientService {
     Map<String, Object> modifyClientInfo(ClientInfo clientInfo) throws RuntimeException;
 
     Map<String, Object> deleteClientInfo(List<Integer> ids) throws RuntimeException;
+
+    Map<String, Object> getClientRental(String phone) throws RuntimeException;
+
+    ClientInfo selectSingleClient(Integer id) throws RuntimeException;
 }

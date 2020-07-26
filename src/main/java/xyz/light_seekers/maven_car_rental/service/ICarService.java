@@ -20,4 +20,8 @@ public interface ICarService {
     Map<String, Object> modifyCarInfo(CarInfo carInfo) throws RuntimeException;
 
     Map<String, Object> deleteCarInfo(List<String> ids) throws RuntimeException;
+
+    Map<String, Object> getTypeCar() throws RuntimeException;
+
+    CarInfo selectSingleCar(String id) throws RuntimeException;
 }

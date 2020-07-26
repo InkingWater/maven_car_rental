@@ -69,4 +69,9 @@ public class InsuranceTypeServiceImpl implements ITypeService {
         MapUtil.mapOperation(result, i);
         return result;
     }
+
+    @Override
+    public TypeInfo selectSingleType(Integer id) throws RuntimeException {
+        return typeInfoMapper.selectByPrimaryKey(id);
+    }
 }

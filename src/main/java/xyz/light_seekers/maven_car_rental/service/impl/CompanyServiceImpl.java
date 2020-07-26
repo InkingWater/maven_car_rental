@@ -65,4 +65,9 @@ public class CompanyServiceImpl implements ICompanyService {
         MapUtil.mapOperation(result, i);
         return null;
     }
+
+    @Override
+    public CompanyInfo selectSingleCompany(String id) throws RuntimeException {
+        return companyInfoMapper.selectByPrimaryKey(id);
+    }
 }

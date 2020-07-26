@@ -53,4 +53,10 @@ public class CarController {
     public MessageUtil.Message deleteCarInfo(@RequestParam(value = "ids") List<String> ids) {
         return MessageUtil.created(carService.deleteCarInfo(ids));
     }
+
+    @RequestMapping(value = "/singleInfoId", method = {RequestMethod.GET})
+    @ApiOperation(value = "根据车辆的编号查找信息")
+    public MessageUtil.Message selectSingleCar(String id) {
+        return MessageUtil.ok(carService.selectSingleCar(id));
+    }
 }

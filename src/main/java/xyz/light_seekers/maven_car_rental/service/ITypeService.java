@@ -18,4 +18,6 @@ public interface ITypeService {
     Map<String, Object> modifyTypeInfo(TypeInfo typeInfo) throws RuntimeException;
 
     Map<String, Object> deleteTypeInfo(List<Integer> ids) throws RuntimeException;
+
+    TypeInfo selectSingleType(Integer id) throws RuntimeException;
 }

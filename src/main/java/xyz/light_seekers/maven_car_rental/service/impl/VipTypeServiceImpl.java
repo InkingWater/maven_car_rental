@@ -2,8 +2,10 @@ package xyz.light_seekers.maven_car_rental.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import xyz.light_seekers.maven_car_rental.bean.ClientInfoExample;
 import xyz.light_seekers.maven_car_rental.bean.VipTypeInfo;
 import xyz.light_seekers.maven_car_rental.bean.VipTypeInfoExample;
+import xyz.light_seekers.maven_car_rental.mapper.ClientInfoMapper;
 import xyz.light_seekers.maven_car_rental.mapper.VipTypeInfoMapper;
 import xyz.light_seekers.maven_car_rental.service.IVipTypeService;
 import xyz.light_seekers.maven_car_rental.util.MapUtil;
@@ -20,10 +22,13 @@ import java.util.Map;
  * @Date: 2020/7/8 22:00
  */
 @Service
-public class VipTypeInfoServiceImpl implements IVipTypeService {
+public class VipTypeServiceImpl implements IVipTypeService {
 
     @Autowired
     private VipTypeInfoMapper vipTypeInfoMapper;
+
+    @Autowired
+    private ClientInfoMapper clientInfoMapper;
 
     @Override
     public Map<String, Object> selectCriteria(String name, Integer pageSize, Integer pageNum) throws RuntimeException {
@@ -62,5 +67,28 @@ public class VipTypeInfoServiceImpl implements IVipTypeService {
         int i = vipTypeInfoMapper.deleteByExample(vipTypeInfoExample);
         MapUtil.mapOperation(result, i);
         return result;
+    }
+
+    @Override
+    public Map<String, Object> getVipClient() throws RuntimeException {
+        Map<String, Object> result = new HashMap<>();
+        Map<String, Long> statistical = new HashMap<>();
+        VipTypeInfoExample vipTypeInfoExample = new VipTypeInfoExample();
+        List<VipTypeInfo> vipTypeInfos = vipTypeInfoMapper.selectByExample(vipTypeInfoExample);
+        ClientInfoExample clientInfoExample = new ClientInfoExample();
+        ClientInfoExample.Criteria criteria = clientInfoExample.createCriteria();
+        criteria.andVipEqualTo(0);
+        statistical.put("非会员", clientInfoMapper.countByExample(clientInfoExample));
+        for (int i = 0; i < vipTypeInfos.size(); i++) {
+            criteria.andVipEqualTo(1).andVipCategoryEqualTo(vipTypeInfos.get(i).getId());
+            statistical.put(vipTypeInfos.get(i).getName(), clientInfoMapper.countByExample(clientInfoExample));
+        }
+        result.put("items", statistical);
+        return result;
+    }
+
+    @Override
+    public VipTypeInfo selectSingleVipType(Integer id) throws RuntimeException {
+        return vipTypeInfoMapper.selectByPrimaryKey(id);
     }
 }
